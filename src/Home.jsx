@@ -193,7 +193,7 @@ function Home() {
       <div className="grid-lines" />
 
       <header className="top-bar">
-        <p className="kicker">Unkind / Current Engine GDD</p>
+        <p className="kicker">Unkind from Projekt Lyoon</p>
         <Link className="pill-link" to="/privacy">
           Privacy
         </Link>

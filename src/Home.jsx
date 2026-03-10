@@ -4,245 +4,278 @@ import { Link } from 'react-router-dom'
 import logo from './assets/unkindbaseNobackground.png'
 
 const sectionOrder = [
-  '1. Objective',
-  '2. Turn vs Round (Vocabulary)',
-  '3. Board and Safety',
-  '4. Turn Flow',
-  '5. Dice and Fuel',
-  '6. Captures and Damage',
-  '7. Hand and Pin',
-  '8. Card List and Fuel Costs',
-  '9. Scoring (Unkind Mode Only)',
-  '10. Turn Direction & Sequence',
+  '1. Victory Conditions',
+  '2. Board / Path / Safety',
+  '3. Turn Lifecycle',
+  '4. Dice and Movement',
+  '5. Extra Turn Sources',
+  '6. Capture, Lives, Fuel Penalty',
+  '7. Hand, Pin, Burn',
+  '8. Card Targeting Constraints',
+  '9. Card List (Fuel Cost)',
+  '10. Unkind Scoring / Tiebreak',
+  '11. Turn Order and Direction',
 ]
 
 const rules = [
   {
-    title: '1. Objective',
+    title: '1. Victory Conditions',
     blocks: [
       {
         heading: 'Standard',
-        bullets: ['Be the first player to get all 4 tokens into HOME_TRIANGLE.'],
+        bullets: ['First player to get all 4 tokens into Home wins.'],
       },
       {
         heading: 'Unkind',
         bullets: [
-          'Flawless Victory: Get all 4 tokens into HOME_TRIANGLE.',
-          "Survivor's Escape: Get all your remaining living tokens home.",
-          'Last Survivor: All other players are completely eliminated (all tokens are DEAD).',
+          'Flawless Victory: 4 home tokens.',
+          "Survivor's Escape: all of your surviving tokens are in Home.",
+          'Last Survivor: only one player still has tokens left in play.',
         ],
       },
     ],
   },
   {
-    title: '2. Turn vs Round (Vocabulary)',
-    blocks: [
-      {
-        heading: 'Definitions',
-        bullets: [
-          'Turn: One player action cycle from WAITING_FOR_ACTION until turn passes.',
-          'Round: One full table cycle where every active player has taken a turn.',
-        ],
-      },
-      {
-        heading: 'Ruin Path and Mirror Step timing',
-        bullets: [
-          'Ruin Path starts with a countdown equal to turnOrder.length * 2 (8 turns in a 4-player match).',
-          'Countdown ticks down by 1 at each turn-end transition.',
-        ],
-      },
-    ],
-  },
-  {
-    title: '3. Board and Safety',
+    title: '2. Board / Path / Safety',
     bullets: [
-      'Public path length: 52 steps.',
+      'Public loop length: 52.',
       'Start indices: GREEN 0, BLUE 13, YELLOW 26, RED 39.',
       'Safe indices: 0, 8, 13, 21, 26, 34, 39, 47.',
-      'Home column is always safe from opponent displacement/capture.',
+      'Safe squares are non-capturable unless Ruin Path is active.',
+      'Home column / home triangle cannot be captured.',
     ],
   },
   {
-    title: '4. Turn Flow',
+    title: '3. Turn Lifecycle',
     blocks: [
       {
-        heading: 'Start of your turn',
+        heading: 'Turn state',
+        bullets: ['Each turn starts in the normal action phase.'],
+      },
+      {
+        heading: 'On player handover',
         bullets: [
-          'Shields on your own tokens are cleared.',
-          'Hand refills to max 3.',
+          "The incoming player's shields are removed.",
+          "The incoming player's hand refills to 3 cards.",
         ],
       },
       {
-        heading: 'During your turn',
+        heading: 'On turn end',
         bullets: [
-          'Roll die or play cards (if fuel allows).',
-          'Some cards require target selection (tokens or cells).',
+          "The current player's unpinned cards are discarded.",
+          'Only the pinned card stays for next turn.',
         ],
       },
       {
-        heading: 'End of turn',
-        bullets: [
-          'Unpinned cards are flushed to the discard pile.',
-          'Pinned card (if any) is retained for the next turn.',
-        ],
-      },
-      {
-        heading: 'Extra turn triggers',
-        bullets: [
-          'Roll a 6.',
-          'Capture an enemy token by dice or card movement.',
-          'One of your tokens reaches HOME_TRIANGLE.',
-          'Use a card that grants initiative: Shield, Freeze, U-Turn, Adrenaline, Minefield, Mirror Step, Ruin Path.',
-        ],
+        heading: 'Ruin Path timer',
+        bullets: ['Ruin Path timer decreases by 1 each completed turn.'],
       },
     ],
   },
   {
-    title: '5. Dice and Fuel',
+    title: '4. Dice and Movement',
     blocks: [
       {
-        heading: 'Dice and resource rules',
+        heading: 'Dice rules',
         bullets: [
-          'Spawn: Releasing a token from Yard requires a roll of 6.',
-          'Fuel gain per roll: 7 - diceValue.',
+          'Roll result is 1..6.',
+          'Yard token needs 6 to spawn.',
+          'Fuel gain on resolved dice move: 7 - dice.',
           'Fuel cap: 12.',
-          'Exact movement required to enter HOME_TRIANGLE.',
-          'Overshooting or back-underflow clamps movement to current/start position.',
         ],
       },
       {
-        heading: 'Pity fuel',
+        heading: 'No legal dice move',
         bullets: [
-          'If no legal move is possible after a roll: gain +1 fuel.',
-          'If the roll was 6, player still retains the extra turn.',
+          'Gain +1 pity fuel.',
+          'If roll was 6, still keep extra turn.',
+        ],
+      },
+      {
+        heading: 'Movement clamping',
+        bullets: [
+          'Cannot move backward past your own starting point.',
+          'You must land exactly on Home to enter it.',
+          'Overshoot is clamped (no move).',
         ],
       },
     ],
   },
   {
-    title: '6. Captures and Damage',
-    blocks: [
-      {
-        heading: 'Capture resolution',
-        bullets: [
-          'Active token landing on an enemy active token captures it (if cell is capturable).',
-          'Safe cells are normally non-capturable.',
-          'If Ruin Path is active, all path cells (including safe/start) become capturable.',
-          'Shielded enemy tokens cannot be captured or targeted by enemy effects.',
-          'Captured player loses 50% of current fuel (clamped down).',
-        ],
-      },
-      {
-        heading: 'Unkind mode damage',
-        bullets: [
-          'Each token starts with 2 lives.',
-          'Any capture (dice, card, or mine) removes 1 life.',
-          'At 0 life token becomes DEAD; otherwise it returns to YARD.',
-        ],
-      },
-    ],
-  },
-  {
-    title: '7. Hand and Pin',
+    title: '5. Extra Turn Sources',
     bullets: [
-      'Max hand size: 3.',
-      'Hand refills to 3 at start of your turn.',
-      'Pin keeps one specific card instance across turn flush.',
-      'Only one card can be pinned; toggling another unpins the previous one.',
+      'Dice roll 6.',
+      'Capture caused by dice move or card-caused movement.',
+      'Reaching Home.',
+      'Cards that grant extra turns: Shield, Mirror Step, Freeze, U-Turn, Adrenaline, Ruin Path, Sacrifice.',
     ],
   },
   {
-    title: '8. Card List and Fuel Costs',
+    title: '6. Capture, Lives, Fuel Penalty',
     blocks: [
       {
-        heading: '8.1 Movement',
+        heading: 'Capture rules',
         bullets: [
-          'Nudge Forward (+1) - 2F',
-          'Nudge Back (-1) - 2F',
-          'March (+3) - 3F',
-          'Backpedal (-3) - 3F',
-          'Dash (+5) - 4F',
-          'Retreat (-5) - 4F',
+          'Capture applies only when two tokens are active on the same board square.',
+          'Shielded enemy tokens cannot be captured or card-targeted.',
+          'Captured player loses half their fuel (rounded down).',
         ],
       },
       {
-        heading: '8.2 Force Movement',
+        heading: 'Unkind lives',
         bullets: [
-          'Force Nudge Forward (+1) - 3F',
-          'Force Nudge Back (-1) - 3F',
-          'Force March (+3) - 4F',
-          'Force Backpedal (-3) - 4F',
-          'Force Dash (+5) - 5F',
-          'Force Retreat (-5) - 5F',
-          'Special: can target tokens on spawn points (start squares) even when safe zones are active.',
+          'Tokens start with 2 lives.',
+          'Capture or mine hit removes 1 life.',
+          'At 0 lives token is eliminated; otherwise it returns to the yard.',
         ],
       },
       {
-        heading: '8.3 Utility',
-        bullets: [
-          'Shield - 4F: protect own token until your next turn start; grants extra turn.',
-          'Deploy - 5F: spawn one Yard token to your start square.',
-          'Switch - 6F: swap track positions of any two active tokens from different players.',
-        ],
-      },
-      {
-        heading: '8.4 Control',
-        bullets: [
-          'Minefield - 5F: place hidden mine on an empty cell; grants extra turn.',
-          'Minefield immunity: placer is immune to their own mine.',
-          'Minefield detonation: enemy landing on cell returns to Yard/DEAD and takes fuel penalty (in Unkind, -1 life).',
-          'Mirror Step - 6F: mark an enemy token; grants extra turn.',
-          'Mirror Step trigger: on your next dice-driven progress gain, marked enemy token moves backward by same amount.',
-          'U-Turn - 6F: reverse turn direction; grants extra turn.',
-          'Freeze - 7F: skip next player in sequence; grants extra turn.',
-          'Adrenaline - 8F: grants one immediate extra turn plus a second bonus turn afterward.',
-        ],
-      },
-      {
-        heading: '8.5 Chaos',
-        bullets: [
-          "Warp Jump - 9F: teleport your active token to the square immediately before the right-hand opponent's start.",
-          'Sacrifice - 9F: requires own active token at progress >= 26.',
-          'Sacrifice destroys that token (lose 1 life).',
-          'Sacrifice deploys up to 2 other tokens from Yard to start.',
-          'Ruin Path - 10F: disables safe/start protections globally for 2 full rounds; grants extra turn.',
-        ],
+        heading: 'Standard mode behavior',
+        bullets: ['Standard mode uses non-lethal captures, and captured tokens return to the yard.'],
       },
     ],
   },
   {
-    title: '9. Scoring (Unkind Mode Only)',
+    title: '7. Hand, Pin, Burn',
     blocks: [
       {
-        heading: 'Combat events',
-        bullets: ['+2 for each capture transition you perform.', '-1 for each time your token is captured.'],
-      },
-      {
-        heading: 'Token status points',
+        heading: 'Hand and pin',
         bullets: [
-          'HOME_TRIANGLE: +5',
-          'ACTIVE or HOME_COLUMN: +2',
-          'YARD: +1 each',
-          'DEAD: +0',
+          'Max hand size: 3.',
+          'One pinned card instance can be retained through flush.',
         ],
       },
       {
-        heading: 'Home combo bonus',
-        bullets: ['3 tokens home: +5 bonus', '4 tokens home: +10 bonus'],
-      },
-      {
-        heading: 'Tie-breaker',
-        bullets: ['Higher remaining fuel wins tie-break.'],
+        heading: 'Burn mechanic',
+        bullets: [
+          'Only MOVEMENT cards can be burned.',
+          'Burn is limited to once per turn (hasBurntCardThisTurn).',
+          'Burn grants +2 fuel, capped by max fuel.',
+          'Burned card goes to discard.',
+        ],
       },
     ],
   },
   {
-    title: '10. Turn Direction & Sequence',
+    title: '8. Card Targeting Constraints',
+    blocks: [
+      {
+        heading: 'Movement targeting',
+        bullets: [
+          'Movement cards target tokens currently on the main track.',
+          'You can also target your own token in your home lane.',
+          'Opponent safe-zone targets are blocked unless Ruin Path is active, or you use a Force Movement card on a start square.',
+        ],
+      },
+      {
+        heading: 'Switch targeting',
+        bullets: [
+          'First target must be your active token.',
+          'Second target must be opponent active token.',
+          'Same-owner pair is invalid.',
+        ],
+      },
+      {
+        heading: 'Minefield targeting',
+        bullets: [
+          'Minefield targets one specific board square.',
+          'That square must be outside safe/start zones, empty, and not already mined.',
+        ],
+      },
+    ],
+  },
+  {
+    title: '9. Card List (Fuel Cost)',
+    blocks: [
+      {
+        heading: 'Movement',
+        bullets: [
+          'Nudge Forward +1 (2F)',
+          'Nudge Back -1 (2F)',
+          'March +3 (3F)',
+          'Backpedal -3 (3F)',
+          'Dash +5 (4F)',
+          'Retreat -5 (4F)',
+        ],
+      },
+      {
+        heading: 'Force Movement',
+        bullets: [
+          'Force Nudge Forward +1 (3F)',
+          'Force Nudge Back -1 (3F)',
+          'Force March +3 (4F)',
+          'Force Backpedal -3 (4F)',
+          'Force Dash +5 (5F)',
+          'Force Retreat -5 (5F)',
+        ],
+      },
+      {
+        heading: 'Utility',
+        bullets: [
+          'Shield (4F): shield one of your tokens on the track or home lane, extra turn.',
+          'Deploy (5F): deploy own yard token to start.',
+          'Switch (6F): swap two active enemy/own tokens with different owners.',
+        ],
+      },
+      {
+        heading: 'Control',
+        bullets: [
+          'Minefield (5F): place one hidden mine, owner-immune. Mine detonates on enemy landing and is consumed.',
+          'Mirror Step (6F): mark enemy token, extra turn. On your next dice movement resolution, move marked token backward by your forward dice steps if any.',
+          'U-Turn (6F): reverse turn direction, extra turn.',
+          'Freeze (7F): next eligible player is skipped once, extra turn.',
+          'Adrenaline (8F): immediate extra turn plus one delayed bonus turn.',
+        ],
+      },
+      {
+        heading: 'Chaos',
+        bullets: [
+          "Warp Jump (9F): move your active token to the square before the right-side opponent's start; if that would move backward, it jumps near your own home-side end instead.",
+          'Sacrifice (9F): choose one of your active tokens past mid-path to lose 1 life, then deploy up to 2 of your yard tokens to start, always extra turn.',
+          'Sacrifice bonus fuel: if no deployable yard token, fuel becomes 10; if exactly one deploy, gain +5 fuel up to 10.',
+          'Ruin Path (10F): safe/start become capturable for two full rounds, extra turn.',
+        ],
+      },
+    ],
+  },
+  {
+    title: '10. Unkind Scoring / Tiebreak',
+    blocks: [
+      {
+        heading: 'Base combat score',
+        bullets: [
+          '+2 per capture.',
+          '+1 assist capture (forced movement assist).',
+          '-1 when your token is captured.',
+        ],
+      },
+      {
+        heading: 'Token-state points',
+        bullets: [
+          'In Home: +5',
+          'On board or in home lane: +2',
+          'In yard: +1',
+          'Eliminated: +0',
+        ],
+      },
+      {
+        heading: 'Home combo',
+        bullets: ['3 home tokens: +5', '4 home tokens: +10'],
+      },
+      {
+        heading: 'Final tiebreak',
+        bullets: ['Higher remaining fuel.'],
+      },
+    ],
+  },
+  {
+    title: '11. Turn Order and Direction',
     bullets: [
-      'Initial order: RED -> GREEN -> BLUE -> YELLOW.',
-      'U-Turn toggles direction between CW and CCW.',
-      'Fully eliminated players are removed from rotation.',
-      'Freeze and Adrenaline influence immediate next-player selection logic.',
+      'Canon order is RED -> GREEN -> BLUE -> YELLOW, rotated by selected starting player.',
+      'Direction starts clockwise.',
+      'U-Turn toggles direction.',
+      'Eliminated players are skipped in next-player selection.',
+      'Freeze adds a one-time skip marker for the next eligible player.',
     ],
   },
 ]

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 const sections = [
@@ -105,7 +105,7 @@ function Privacy() {
         </Link>
       </header>
 
-      <motion.main
+      <Motion.main
         className="privacy-main"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -170,7 +170,7 @@ function Privacy() {
             </ul>
           </section>
         </article>
-      </motion.main>
+      </Motion.main>
     </div>
   )
 }

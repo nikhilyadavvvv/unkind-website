@@ -1,0 +1,21 @@
+# Unkind
+
+> Unkind is a tactical board game by Projekt Lyoon with offline solo play, multiplayer play, and a shared deck built from five card families. This site contains the game overview, rules reference, privacy policy, and official links for the iOS release and public asset showcase.
+
+The homepage is the best starting point for product summaries, feature overviews, and deck breakdowns. The rules file is the best source for gameplay questions about turn flow, movement, fuel, captures, and win conditions. Use the privacy file for data handling and account questions.
+
+## Core Pages
+
+- [Homepage markdown](https://www.projektlyoon.com/index.html.md): Tagline, product overview, key systems, deck categories, and main links.
+- [Rules reference](https://www.projektlyoon.com/rules/index.html.md): Structured gameplay rules covering the board, turns, cards, movement, fuel, and win conditions.
+- [Privacy policy](https://www.projektlyoon.com/privacy/index.html.md): Privacy policy for the Unkind mobile app.
+
+## Official Links
+
+- [Homepage](https://www.projektlyoon.com/): Human-facing landing page.
+- [App Store listing](https://apps.apple.com/de/app/unkind/id6760196649?l=en-GB): Official iOS download page.
+- [Open source asset showcase](https://github.com/projektlyoon/ProjektLyoonAssetShowcase): Public repository with showcase assets and related project material.
+
+## Optional
+
+- [Privacy page](https://www.projektlyoon.com/privacy): Human-facing privacy route.

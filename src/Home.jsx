@@ -485,10 +485,14 @@ function Home() {
               <a className="cta-secondary" href="mailto:projektlyoon@gmail.com">
                 Contact Developer
               </a>
-              <span className="cta-secondary cta-disabled" aria-label="Android version coming soon">
+              <a
+                className="cta-secondary"
+                href="mailto:projektlyoon@gmail.com?subject=Android Closed Testing"
+                aria-label="Join Android closed testing"
+              >
                 <AndroidBrandIcon size={18} />
-                Android Coming Soon
-              </span>
+                Android Closed Testing
+              </a>
             </Motion.div>
 
             <Motion.div

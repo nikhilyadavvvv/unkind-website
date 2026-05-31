@@ -34,5 +34,5 @@ The game rewards positioning, timing, and board control. You can play offline ag
 
 - [Homepage](https://www.projektlyoon.com/)
 - [Rules reference](https://www.projektlyoon.com/rules/index.html.md)
-- [Privacy policy](https://www.projektlyoon.com/privacy/index.html.md)
+- [Privacy policy](https://www.projektlyoon.com/privacy)
 - [Open source asset showcase](https://github.com/projektlyoon/ProjektLyoonAssetShowcase)

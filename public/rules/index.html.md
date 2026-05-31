@@ -103,4 +103,4 @@ This file summarizes the gameplay rules shown on the homepage. It is intended fo
 
 - [Homepage](https://www.projektlyoon.com/)
 - [Homepage markdown](https://www.projektlyoon.com/index.html.md)
-- [Privacy policy](https://www.projektlyoon.com/privacy/index.html.md)
+- [Privacy policy](https://www.projektlyoon.com/privacy)

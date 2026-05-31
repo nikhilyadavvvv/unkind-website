@@ -8,7 +8,7 @@ The homepage is the best starting point for product summaries, feature overviews
 
 - [Homepage markdown](https://www.projektlyoon.com/index.html.md): Tagline, product overview, key systems, deck categories, and main links.
 - [Rules reference](https://www.projektlyoon.com/rules/index.html.md): Structured gameplay rules covering the board, turns, cards, movement, fuel, and win conditions.
-- [Privacy policy](https://www.projektlyoon.com/privacy/index.html.md): Privacy policy for the Unkind mobile app.
+- [Privacy policy](https://www.projektlyoon.com/privacy): Privacy policy for the Unkind mobile app.
 
 ## Official Links
 

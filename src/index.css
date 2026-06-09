@@ -16,6 +16,7 @@
   --ink: #ffffff;
   --muted: #8e8e93;
   --dim: #666666;
+  --radius: 12px;
   color: var(--ink);
   background: var(--screen);
   font-family: 'Space Grotesk', system-ui, sans-serif;
@@ -126,7 +127,7 @@ a {
 .brand-lockup img {
   width: 42px;
   height: 42px;
-  border-radius: 14px;
+  border-radius: var(--radius);
   object-fit: contain;
 }
 
@@ -153,7 +154,7 @@ a {
   justify-content: center;
   gap: 0.45rem;
   min-height: 42px;
-  border-radius: 999px;
+  border-radius: var(--radius);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -289,7 +290,7 @@ main {
   transform: translate(-50%, -50%);
   overflow: hidden;
   border: 1px solid rgba(232, 198, 126, 0.28);
-  border-radius: 42px;
+  border-radius: var(--radius);
   background: #050508;
   box-shadow:
     0 0 0 10px rgba(255, 255, 255, 0.025),
@@ -311,7 +312,7 @@ main {
   aspect-ratio: 396 / 844;
   overflow: hidden;
   border: 1px solid rgba(232, 198, 126, 0.24);
-  border-radius: 24px;
+  border-radius: var(--radius);
   background: var(--panel);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.46);
 }
@@ -328,7 +329,7 @@ main {
   right: 0.75rem;
   bottom: 0.75rem;
   border: 1px solid rgba(232, 198, 126, 0.18);
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 0.55rem;
   color: var(--blue);
   font-size: 0.74rem;
@@ -386,7 +387,7 @@ main {
   min-height: clamp(360px, 40vw, 560px);
   overflow: hidden;
   border: 1px solid rgba(232, 198, 126, 0.2);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--panel);
 }
 
@@ -440,7 +441,7 @@ main {
   min-height: 570px;
   overflow: hidden;
   border: 1px solid rgba(232, 198, 126, 0.18);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--panel);
 }
 
@@ -509,7 +510,7 @@ main {
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(232, 198, 126, 0.2);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--panel);
   box-shadow: 0 24px 68px rgba(0, 0, 0, 0.36);
 }
@@ -567,7 +568,7 @@ main {
   aspect-ratio: 683 / 1024;
   overflow: hidden;
   border: 1px solid rgba(232, 198, 126, 0.2);
-  border-radius: 18px;
+  border-radius: var(--radius);
   background: var(--panel);
   box-shadow: 0 24px 68px rgba(0, 0, 0, 0.42);
 }
@@ -583,7 +584,7 @@ main {
   left: 0.8rem;
   bottom: 0.8rem;
   border: 1px solid rgba(232, 198, 126, 0.2);
-  border-radius: 999px;
+  border-radius: var(--radius);
   padding: 0.38rem 0.58rem;
   color: var(--ink);
   font-size: 0.78rem;
@@ -635,7 +636,7 @@ main {
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(232, 198, 126, 0.16);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: rgba(18, 20, 31, 0.78);
 }
 
@@ -675,7 +676,7 @@ main {
   min-height: 260px;
   padding: 1.25rem;
   border: 1px solid rgba(232, 198, 126, 0.16);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background:
     radial-gradient(circle at top right, rgba(165, 180, 252, 0.12), transparent 32%),
     rgba(18, 20, 31, 0.74);
@@ -779,7 +780,7 @@ main {
 .policy-card {
   border: 1px solid rgba(232, 198, 126, 0.16);
   background: rgba(18, 20, 31, 0.84);
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: clamp(1.2rem, 3vw, 2.4rem);
 }
 
@@ -1074,13 +1075,13 @@ main {
 .title-scatter-item.is-card {
   width: clamp(108px, 10.5vw, 190px);
   aspect-ratio: 683 / 1024;
-  border-radius: 20px;
+  border-radius: var(--radius);
 }
 
 .title-scatter-item.is-shot {
   width: clamp(126px, 13vw, 232px);
   aspect-ratio: 396 / 844;
-  border-radius: 26px;
+  border-radius: var(--radius);
 }
 
 .title-scatter-1 {
@@ -1248,12 +1249,12 @@ main {
 
   .title-scatter-item.is-card {
     width: clamp(70px, 18vw, 112px);
-    border-radius: 12px;
+    border-radius: var(--radius);
   }
 
   .title-scatter-item.is-shot {
     width: clamp(84px, 22vw, 136px);
-    border-radius: 16px;
+    border-radius: var(--radius);
   }
 
   .title-scatter-1 {

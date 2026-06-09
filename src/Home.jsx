@@ -70,7 +70,7 @@ const pillars = [
   {
     icon: Dice6,
     title: 'Looks familiar. Turns mean.',
-    copy: 'Race pieces around the board, then spend fuel to interfere with everyone else.',
+    copy: 'Race tokens around the board, then spend fuel to interfere with everyone else.',
   },
   {
     icon: Zap,
@@ -80,7 +80,7 @@ const pillars = [
   {
     icon: Crosshair,
     title: 'Unkind mode has death.',
-    copy: 'When a piece runs out of lives, it is gone for the match.',
+    copy: 'When a token runs out of lives, it is gone for the match.',
   },
 ]
 
@@ -88,7 +88,7 @@ const rules = [
   'Get around the board before they do.',
   'Earn fuel by moving.',
   'Spend it to make their turn worse.',
-  'In Unkind mode, dead pieces stay dead.',
+  'In Unkind mode, dead tokens stay dead.',
 ]
 
 const titleScatterSources = [
@@ -395,8 +395,8 @@ function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.16 }}
             >
-              Race your pieces home. Use cards to trap, swap, freeze, steal rolls, and kill
-              pieces permanently in Unkind mode.
+              Race your tokens home. Use cards to trap, swap, freeze, steal rolls, and kill
+              tokens permanently in Unkind mode.
             </Motion.p>
           </div>
         </section>
@@ -425,7 +425,7 @@ function Home() {
               <img src={triggerTrapShot} alt="Mine trigger message after a token is eliminated." loading="lazy" />
               <div>
                 <span>03</span>
-                <h3>Their piece dies.</h3>
+                <h3>Their token dies.</h3>
               </div>
             </article>
           </div>

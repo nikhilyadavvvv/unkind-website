@@ -96,9 +96,6 @@ const sections = [
 function Privacy() {
   return (
     <div className="privacy-shell">
-      <div className="orb orb-c" />
-      <div className="orb orb-d" />
-
       <header className="privacy-nav">
         <Link to="/" className="pill-link">
           Back to Home

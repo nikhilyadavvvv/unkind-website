@@ -110,39 +110,86 @@ const titleScatterSources = [
 ]
 
 const titleScatterSlots = [
-  { x: -42, y: -36 }, { x: -24, y: -39 }, { x: -9, y: -41 },
-  { x: 9, y: -41 }, { x: 24, y: -39 }, { x: 42, y: -36 },
-  { x: -45, y: -17 }, { x: 45, y: -17 },
-  { x: -47, y: 2 }, { x: 47, y: 2 },
-  { x: -45, y: 21 }, { x: 45, y: 21 },
-  { x: -39, y: 37 }, { x: -22, y: 40 }, { x: -8, y: 42 },
-  { x: 8, y: 42 }, { x: 22, y: 40 }, { x: 39, y: 37 },
+  { x: -51, y: -42 }, { x: -31, y: -50 }, { x: -11, y: -52 }, { x: 11, y: -52 }, { x: 30, y: -50 }, { x: 43, y: -42 },
+  { x: -53, y: -20 }, { x: 44, y: -20 },
+  { x: -48, y: 0, fill: true }, { x: 40, y: 0, fill: true },
+  { x: -52, y: 20 }, { x: 43, y: 20 },
+  { x: -37, y: -31, fill: true }, { x: 36, y: -31, fill: true },
+  { x: -18, y: 32, fill: true }, { x: 17, y: 32, fill: true },
+  { x: -42, y: 35 }, { x: -24, y: 34 }, { x: -7, y: 34 },
+  { x: 7, y: 34 }, { x: 23, y: 34 }, { x: 36, y: 35 },
 ]
 
 const randomBetween = (min, max) => min + Math.random() * (max - min)
-const formatVw = (value) => `${value.toFixed(2)}vw`
-const formatVh = (value) => `${value.toFixed(2)}vh`
+const formatScatterX = (value) => `${value.toFixed(2)}vw`
+const formatScatterY = (value) => `${value.toFixed(2)}vh`
 const formatDeg = (value) => `${value.toFixed(2)}deg`
 const shuffle = (items) => [...items].sort(() => Math.random() - 0.5)
+const getSlotSide = (slot) => {
+  if (slot.x < -8) return 'left'
+  if (slot.x > 8) return 'right'
+  return 'center'
+}
+const pickNextSource = (sources, index, lastSource, usedSideSources) => {
+  for (let offset = 0; offset < sources.length; offset += 1) {
+    const nextIndex = index + offset
+    const source = sources[nextIndex % sources.length]
+    if (source.image !== lastSource?.image && !usedSideSources.has(source.image)) {
+      return { source, index: nextIndex + 1 }
+    }
+  }
+
+  const source = sources[index % sources.length]
+  if (source.image !== lastSource?.image) return { source, index: index + 1 }
+
+  const nextIndex = index + 1
+  return {
+    source: sources[nextIndex % sources.length],
+    index: nextIndex + 1,
+  }
+}
 const keepOutsideTitleBand = (target) => {
-  const isInsideTitleBand = Math.abs(target.x) < 27 && Math.abs(target.y) < 26
+  const isInsideTitleBand = Math.abs(target.x) < 30 && Math.abs(target.y) < 28
   if (!isInsideTitleBand) return target
 
   return {
-    x: target.x < 0 ? -27 : 27,
-    y: target.y < 0 ? -26 : 26,
+    x: target.x < 0 ? -30 : 30,
+    y: target.y < 0 ? -28 : 28,
   }
 }
 
 function createTitleScatterLayout() {
-  const slots = shuffle(titleScatterSlots)
-  const sources = shuffle([...titleScatterSources, ...titleScatterSources.slice(0, 3)])
+  const slots = titleScatterSlots
+  const cardSources = shuffle(titleScatterSources.filter((source) => source.kind === 'card'))
+  const frameSources = shuffle([
+    ...titleScatterSources,
+    ...titleScatterSources.filter((source) => source.kind === 'card').slice(0, 5),
+  ])
+  let cardIndex = 0
+  let frameIndex = 0
+  let lastSource = null
+  const usedSourcesBySide = {
+    center: new Set(),
+    left: new Set(),
+    right: new Set(),
+  }
 
   return slots.map((slot, index) => {
-    const source = sources[index % sources.length]
+    const side = getSlotSide(slot)
+    const picked = slot.fill
+      ? pickNextSource(cardSources, cardIndex, lastSource, usedSourcesBySide[side])
+      : pickNextSource(frameSources, frameIndex, lastSource, usedSourcesBySide[side])
+    const source = picked.source
+    if (slot.fill) {
+      cardIndex = picked.index
+    } else {
+      frameIndex = picked.index
+    }
+    lastSource = source
+    usedSourcesBySide[side].add(source.image)
     const target = keepOutsideTitleBand({
-      x: slot.x + randomBetween(-2.4, 2.4),
-      y: slot.y + randomBetween(-2.2, 2.2),
+      x: slot.x + randomBetween(-1.3, 1.3),
+      y: slot.y + randomBetween(-0.7, 0.7),
     })
     const outwardX = target.x === 0 ? randomBetween(-1, 1) : Math.sign(target.x)
     const outwardY = target.y === 0 ? randomBetween(-1, 1) : Math.sign(target.y)
@@ -154,13 +201,13 @@ function createTitleScatterLayout() {
     return {
       ...source,
       id: `${source.alt}-${index}`,
-      scale: Number(randomBetween(0.78, 1.02).toFixed(2)),
+      scale: Number(randomBetween(0.94, 1.22).toFixed(2)),
       style: {
-        '--scatter-x': formatVw(target.x),
-        '--scatter-y': formatVh(target.y),
+        '--scatter-x': formatScatterX(target.x),
+        '--scatter-y': formatScatterY(target.y),
         '--scatter-rotate': formatDeg(randomBetween(-16, 16)),
-        '--scatter-start-x': formatVw(start.x),
-        '--scatter-start-y': formatVh(start.y),
+        '--scatter-start-x': formatScatterX(start.x),
+        '--scatter-start-y': formatScatterY(start.y),
         '--scatter-start-rotate': formatDeg(randomBetween(-24, 24)),
         zIndex: index + 1,
       },

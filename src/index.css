@@ -1072,15 +1072,15 @@ main {
 }
 
 .title-scatter-item.is-card {
-  width: clamp(74px, 8.5vw, 132px);
+  width: clamp(108px, 10.5vw, 190px);
   aspect-ratio: 683 / 1024;
-  border-radius: 16px;
+  border-radius: 20px;
 }
 
 .title-scatter-item.is-shot {
-  width: clamp(96px, 12vw, 184px);
+  width: clamp(126px, 13vw, 232px);
   aspect-ratio: 396 / 844;
-  border-radius: 24px;
+  border-radius: 26px;
 }
 
 .title-scatter-1 {

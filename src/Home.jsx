@@ -254,14 +254,6 @@ const cardFanLayouts = [
   ],
 ]
 
-function FuelBadge({ value }) {
-  return (
-    <span className="hand-card-fuel-badge" aria-label={`${value} fuel`}>
-      <span>{value}</span>
-    </span>
-  )
-}
-
 function WebsiteHandCard({ card, loading = 'lazy' }) {
   return (
     <div className="website-hand-card" tabIndex={0} aria-label={`${card.title} card. ${card.description}`}>
@@ -273,9 +265,6 @@ function WebsiteHandCard({ card, loading = 'lazy' }) {
             <span className="hand-card-front-name-glow">{card.title}</span>
             <span>{card.title}</span>
           </div>
-          <div className="hand-card-front-fuel">
-            <FuelBadge value={card.fuelCost} />
-          </div>
         </div>
         <div className="website-hand-card-face website-hand-card-back" aria-hidden="true">
           <img className="hand-card-back-art" src={card.image} alt="" loading={loading} />
@@ -285,9 +274,6 @@ function WebsiteHandCard({ card, loading = 'lazy' }) {
               <strong>{card.title}</strong>
             </div>
             <p>{card.description}</p>
-            <div className="hand-card-back-fuel">
-              <FuelBadge value={card.fuelCost} />
-            </div>
           </div>
         </div>
       </div>
@@ -433,47 +419,6 @@ function Home() {
           </button>
         </section>
 
-        <section id="about" className="hero">
-          <div className="hero-art">
-            <div className="phone-frame">
-              <img src={captureOpponent} alt="A live Unkind match with a card selected, opponent tokens threatened, and fuel at maximum." />
-            </div>
-            <figure className="hero-card hero-card-left">
-              <img src={switchShot} alt="A Switch card being played over the Unkind board." />
-            </figure>
-            <figure className="hero-card hero-card-right">
-              <img src={triggerTrapShot} alt="A mine trigger message showing a token was eliminated." />
-            </figure>
-          </div>
-
-          <div className="hero-copy-block">
-            <Motion.p
-              className="eyebrow"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              Friendship-ending Ludo.
-            </Motion.p>
-            <Motion.h1
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-            >
-              Nobody is safe.
-            </Motion.h1>
-            <Motion.p
-              className="hero-lede"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.16 }}
-            >
-              Race your tokens home. Use cards to trap, swap, freeze, steal rolls, and kill
-              tokens permanently in Unkind mode.
-            </Motion.p>
-          </div>
-        </section>
-
         <section className="section proof-section">
           <div className="section-heading">
             <p className="eyebrow">How it plays</p>
@@ -560,6 +505,47 @@ function Home() {
                 </div>
               </Motion.article>
             ))}
+          </div>
+        </section>
+
+        <section id="about" className="hero">
+          <div className="hero-art">
+            <div className="phone-frame">
+              <img src={captureOpponent} alt="A live Unkind match with a card selected, opponent tokens threatened, and fuel at maximum." />
+            </div>
+            <figure className="hero-card hero-card-left">
+              <img src={switchShot} alt="A Switch card being played over the Unkind board." />
+            </figure>
+            <figure className="hero-card hero-card-right">
+              <img src={triggerTrapShot} alt="A mine trigger message showing a token was eliminated." />
+            </figure>
+          </div>
+
+          <div className="hero-copy-block">
+            <Motion.p
+              className="eyebrow"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Friendship-ending Ludo.
+            </Motion.p>
+            <Motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+            >
+              Nobody is safe.
+            </Motion.h1>
+            <Motion.p
+              className="hero-lede"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.16 }}
+            >
+              Race your tokens home. Use cards to trap, swap, freeze, steal rolls, and kill
+              tokens permanently in Unkind mode.
+            </Motion.p>
           </div>
         </section>
 

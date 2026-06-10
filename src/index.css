@@ -658,40 +658,6 @@ main {
   text-shadow: 0 0 2.4px rgba(255, 255, 255, 0.5);
 }
 
-.hand-card-front-fuel {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 4;
-}
-
-.hand-card-fuel-badge {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 900;
-  line-height: 1;
-}
-
-.hand-card-fuel-badge::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(145deg, rgba(232, 198, 126, 0.98), rgba(104, 70, 24, 0.96));
-  clip-path: polygon(50% 0, 92% 25%, 92% 75%, 50% 100%, 8% 75%, 8% 25%);
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
-}
-
-.hand-card-fuel-badge span {
-  position: relative;
-  z-index: 1;
-  transform: translateY(1px);
-}
-
 .website-hand-card-back {
   background: #12141f;
   transform: rotateY(180deg);
@@ -753,12 +719,6 @@ main {
   font-size: clamp(0.72rem, 0.96vw, 0.88rem);
   font-weight: 600;
   line-height: 1.24;
-}
-
-.hand-card-back-fuel {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
 }
 
 @keyframes hand-card-shimmer {

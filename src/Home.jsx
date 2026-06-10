@@ -16,19 +16,30 @@ import AnimatedTitle from './components/AnimatedTitle'
 import logoIcon from './assets/optimized/unkind-icon.png'
 import captureOpponent from './assets/optimized/capture-opponent.jpg'
 import layTrapShot from './assets/optimized/lay-trap.jpg'
+import targetInRangeShot from './assets/target_in_range.webp'
 import switchShot from './assets/optimized/switch.jpg'
 import triggerTrapShot from './assets/optimized/trigger-trap.jpg'
 import globalArena from './assets/optimized/global-arena.jpg'
 import privateMatch from './assets/optimized/private-match.jpg'
 import soloPractice from './assets/optimized/solo-practice.jpg'
-import dashCard from './assets/optimized/card-dash.jpg'
-import freezeCard from './assets/optimized/card-freeze.jpg'
-import minefieldCard from './assets/optimized/card-minefield.jpg'
-import mirrorCard from './assets/optimized/card-mirror.jpg'
-import parasiteCard from './assets/optimized/card-parasite.jpg'
-import ruinCard from './assets/optimized/card-ruin-path.jpg'
-import shieldCard from './assets/optimized/card-shield.jpg'
-import warpCard from './assets/optimized/card-warp.jpg'
+import adrenalineCard from './assets/cards/adrenaline.png'
+import backPedalCard from './assets/cards/back_pedal.png'
+import dashCard from './assets/cards/dash.png'
+import deployCard from './assets/cards/deploy.png'
+import freezeCard from './assets/cards/freeze.png'
+import marchCard from './assets/cards/march.png'
+import minefieldCard from './assets/cards/minefield.png'
+import mirrorCard from './assets/cards/mirror.png'
+import nudgeBackCard from './assets/cards/nudge_back.png'
+import nudgeForwardCard from './assets/cards/nudge_forward.png'
+import parasiteCard from './assets/cards/parasite.png'
+import retreatCard from './assets/cards/retreat.png'
+import ruinCard from './assets/cards/ruin_path.png'
+import sacrificeCard from './assets/cards/sacrifice.png'
+import shieldCard from './assets/cards/shield.png'
+import switchCard from './assets/cards/switch.png'
+import uturnCard from './assets/cards/uturn.png'
+import warpCard from './assets/cards/warp.png'
 import appleStoreIcon from './assets/apple-173.svg'
 
 const APP_STORE_URL = 'https://apps.apple.com/de/app/unkind/id6760196649?l=en-GB'
@@ -56,14 +67,24 @@ const playModes = [
 ]
 
 const featuredCards = [
-  { title: 'Warp Jump', type: 'Chaos', image: warpCard },
-  { title: 'Parasite', type: 'Control', image: parasiteCard },
-  { title: 'Minefield', type: 'Control', image: minefieldCard },
-  { title: 'Mirror', type: 'Counter', image: mirrorCard },
-  { title: 'Ruin Path', type: 'Pressure', image: ruinCard },
-  { title: 'Dash', type: 'Tempo', image: dashCard },
-  { title: 'Freeze', type: 'Lockdown', image: freezeCard },
-  { title: 'Shield', type: 'Defense', image: shieldCard },
+  { title: 'Nudge Forward (+1)', shortTitle: 'Nudge Forward', type: 'Move', image: nudgeForwardCard, fuelCost: 2, description: 'Move any eligible token 1 step forward.' },
+  { title: 'Nudge Back (-1)', shortTitle: 'Nudge Back', type: 'Move', image: nudgeBackCard, fuelCost: 2, description: 'Move any eligible token 1 step back.' },
+  { title: 'March (+3)', shortTitle: 'March', type: 'Move', image: marchCard, fuelCost: 3, description: 'Move any eligible token 3 steps forward.' },
+  { title: 'Backpedal (-3)', shortTitle: 'Backpedal', type: 'Move', image: backPedalCard, fuelCost: 3, description: 'Move any eligible token 3 steps back.' },
+  { title: 'Dash (+5)', shortTitle: 'Dash', type: 'Move', image: dashCard, fuelCost: 4, description: 'Move any eligible token 5 steps forward.' },
+  { title: 'Retreat (-5)', shortTitle: 'Retreat', type: 'Move', image: retreatCard, fuelCost: 4, description: 'Move any eligible token 5 steps back.' },
+  { title: 'Shield', shortTitle: 'Shield', type: 'Utility', image: shieldCard, fuelCost: 3, description: "Selected token can't be captured until your next turn." },
+  { title: 'Switch', shortTitle: 'Switch', type: 'Utility', image: switchCard, fuelCost: 5, description: 'Swap places of your token and an enemy token.' },
+  { title: 'Deploy', shortTitle: 'Deploy', type: 'Utility', image: deployCard, fuelCost: 5, description: 'Bring 1 token out of your yard.' },
+  { title: 'Minefield', shortTitle: 'Minefield', type: 'Control', image: minefieldCard, fuelCost: 4, description: 'Drop a hidden mine on a cell.' },
+  { title: 'Mirror Step', shortTitle: 'Mirror', type: 'Control', image: mirrorCard, fuelCost: 5, description: 'Selected enemy token moves opposite your direction on your next roll.' },
+  { title: 'U-Turn', shortTitle: 'U-Turn', type: 'Control', image: uturnCard, fuelCost: 5, description: 'Flip turn order. Play again.' },
+  { title: 'Freeze', shortTitle: 'Freeze', type: 'Control', image: freezeCard, fuelCost: 6, description: 'Skip the next player. Play again.' },
+  { title: 'Adrenaline', shortTitle: 'Adrenaline', type: 'Control', image: adrenalineCard, fuelCost: 6, description: 'Play now, then get one more bonus turn.' },
+  { title: 'Warp Jump', shortTitle: 'Warp Jump', type: 'Chaos', image: warpCard, fuelCost: 8, description: 'Teleport close to home.' },
+  { title: 'Sacrifice', shortTitle: 'Sacrifice', type: 'Chaos', image: sacrificeCard, fuelCost: 9, description: 'Remove this token, bring out 2, then play again.' },
+  { title: 'Ruin Path', shortTitle: 'Ruin Path', type: 'Chaos', image: ruinCard, fuelCost: 8, description: 'Safe and spawn cells are risky for 2 rounds.' },
+  { title: 'Parasite', shortTitle: 'Parasite', type: 'Chaos', image: parasiteCard, fuelCost: 6, description: 'If your token is on an enemy start cell, steal their 6 rolls.' },
 ]
 
 const pillars = [
@@ -91,23 +112,11 @@ const rules = [
   'In Unkind mode, dead tokens stay dead.',
 ]
 
-const titleScatterSources = [
-  { image: warpCard, alt: 'Warp Jump card', kind: 'card' },
-  { image: minefieldCard, alt: 'Minefield card', kind: 'card' },
-  { image: parasiteCard, alt: 'Parasite card', kind: 'card' },
-  { image: shieldCard, alt: 'Shield card', kind: 'card' },
-  { image: mirrorCard, alt: 'Mirror card', kind: 'card' },
-  { image: dashCard, alt: 'Dash card', kind: 'card' },
-  { image: freezeCard, alt: 'Freeze card', kind: 'card' },
-  { image: ruinCard, alt: 'Ruin Path card', kind: 'card' },
-  { image: captureOpponent, alt: 'Unkind gameplay board with a selected card', kind: 'shot' },
-  { image: triggerTrapShot, alt: 'Mine trigger result in an Unkind match', kind: 'shot' },
-  { image: soloPractice, alt: 'Solo Practice mode screen', kind: 'shot' },
-  { image: privateMatch, alt: 'Private Match mode screen', kind: 'shot' },
-  { image: globalArena, alt: 'Global Arena mode screen', kind: 'shot' },
-  { image: layTrapShot, alt: 'Minefield targeting on the Unkind board', kind: 'shot' },
-  { image: switchShot, alt: 'Switch card being played over the Unkind board', kind: 'shot' },
-]
+const titleScatterCardSources = featuredCards.map((card) => ({
+  image: card.image,
+  alt: `${card.title} card`,
+  kind: 'card',
+}))
 
 const titleScatterSlots = [
   { x: -51, y: -42 }, { x: -31, y: -50 }, { x: -11, y: -52 }, { x: 11, y: -52 }, { x: 30, y: -50 }, { x: 43, y: -42 },
@@ -125,27 +134,18 @@ const formatScatterX = (value) => `${value.toFixed(2)}vw`
 const formatScatterY = (value) => `${value.toFixed(2)}vh`
 const formatDeg = (value) => `${value.toFixed(2)}deg`
 const shuffle = (items) => [...items].sort(() => Math.random() - 0.5)
-const getSlotSide = (slot) => {
-  if (slot.x < -8) return 'left'
-  if (slot.x > 8) return 'right'
-  return 'center'
-}
-const pickNextSource = (sources, index, lastSource, usedSideSources) => {
+const pickNextUnusedSource = (sources, index, usedSources) => {
   for (let offset = 0; offset < sources.length; offset += 1) {
     const nextIndex = index + offset
     const source = sources[nextIndex % sources.length]
-    if (source.image !== lastSource?.image && !usedSideSources.has(source.image)) {
+    if (!usedSources.has(source.image)) {
       return { source, index: nextIndex + 1 }
     }
   }
 
-  const source = sources[index % sources.length]
-  if (source.image !== lastSource?.image) return { source, index: index + 1 }
-
-  const nextIndex = index + 1
   return {
-    source: sources[nextIndex % sources.length],
-    index: nextIndex + 1,
+    source: sources[index % sources.length],
+    index: index + 1,
   }
 }
 const keepOutsideTitleBand = (target) => {
@@ -159,34 +159,16 @@ const keepOutsideTitleBand = (target) => {
 }
 
 function createTitleScatterLayout() {
-  const slots = titleScatterSlots
-  const cardSources = shuffle(titleScatterSources.filter((source) => source.kind === 'card'))
-  const frameSources = shuffle([
-    ...titleScatterSources,
-    ...titleScatterSources.filter((source) => source.kind === 'card').slice(0, 5),
-  ])
+  const slots = titleScatterSlots.slice(0, titleScatterCardSources.length)
+  const cardSources = shuffle(titleScatterCardSources)
   let cardIndex = 0
-  let frameIndex = 0
-  let lastSource = null
-  const usedSourcesBySide = {
-    center: new Set(),
-    left: new Set(),
-    right: new Set(),
-  }
+  const usedSources = new Set()
 
   return slots.map((slot, index) => {
-    const side = getSlotSide(slot)
-    const picked = slot.fill
-      ? pickNextSource(cardSources, cardIndex, lastSource, usedSourcesBySide[side])
-      : pickNextSource(frameSources, frameIndex, lastSource, usedSourcesBySide[side])
+    const picked = pickNextUnusedSource(cardSources, cardIndex, usedSources)
     const source = picked.source
-    if (slot.fill) {
-      cardIndex = picked.index
-    } else {
-      frameIndex = picked.index
-    }
-    lastSource = source
-    usedSourcesBySide[side].add(source.image)
+    cardIndex = picked.index
+    usedSources.add(source.image)
     const target = keepOutsideTitleBand({
       x: slot.x + randomBetween(-1.3, 1.3),
       y: slot.y + randomBetween(-0.7, 0.7),
@@ -245,29 +227,120 @@ function StoreIcon({ platform }) {
   )
 }
 
-function CardFan({ reduceMotion }) {
+const cardFanLayouts = [
+  [
+    { left: '5%', top: '12%', rotate: -15, zIndex: 1, drift: 7, duration: 5.2 },
+    { left: '20%', top: '4%', rotate: -8, zIndex: 2, drift: -8, duration: 6.1 },
+    { left: '35%', top: '0%', rotate: -2, zIndex: 3, drift: 6, duration: 5.7 },
+    { right: '35%', top: '0%', rotate: 3, zIndex: 3, drift: -7, duration: 6.4 },
+    { right: '20%', top: '5%', rotate: 9, zIndex: 2, drift: 8, duration: 5.9 },
+    { right: '5%', top: '14%', rotate: 15, zIndex: 1, drift: -6, duration: 6.7 },
+  ],
+  [
+    { left: '6%', top: '24%', rotate: -4, zIndex: 1, drift: -6, duration: 6.3 },
+    { left: '19%', top: '12%', rotate: -11, zIndex: 2, drift: 9, duration: 5.5 },
+    { left: '34%', top: '2%', rotate: -5, zIndex: 3, drift: -7, duration: 6.8 },
+    { right: '34%', top: '8%', rotate: 6, zIndex: 4, drift: 8, duration: 5.8 },
+    { right: '20%', top: '18%', rotate: 13, zIndex: 2, drift: -9, duration: 6.5 },
+    { right: '4%', top: '7%', rotate: -2, zIndex: 1, drift: 6, duration: 5.9 },
+  ],
+  [
+    { left: '5%', top: '4%', rotate: 10, zIndex: 1, drift: 8, duration: 5.6 },
+    { left: '20%', top: '17%', rotate: -13, zIndex: 2, drift: -7, duration: 6.6 },
+    { left: '35%', top: '8%', rotate: 4, zIndex: 4, drift: 9, duration: 5.8 },
+    { right: '35%', top: '3%', rotate: -7, zIndex: 3, drift: -8, duration: 6.2 },
+    { right: '20%', top: '14%', rotate: 11, zIndex: 2, drift: 7, duration: 6.9 },
+    { right: '5%', top: '24%', rotate: 5, zIndex: 1, drift: -6, duration: 5.4 },
+  ],
+]
+
+function FuelBadge({ value }) {
   return (
-    <div className="card-fan" aria-label="Featured Unkind cards">
-      {featuredCards.slice(0, 5).map((card, index) => (
+    <span className="hand-card-fuel-badge" aria-label={`${value} fuel`}>
+      <span>{value}</span>
+    </span>
+  )
+}
+
+function WebsiteHandCard({ card, loading = 'lazy' }) {
+  return (
+    <div className="website-hand-card" tabIndex={0} aria-label={`${card.title} card. ${card.description}`}>
+      <div className="website-hand-card-inner">
+        <div className="website-hand-card-face website-hand-card-front">
+          <img src={card.image} alt={`${card.title} card art`} loading={loading} />
+          <div className="hand-card-front-name" aria-hidden="true">
+            <span className="hand-card-front-name-outline">{card.title}</span>
+            <span className="hand-card-front-name-glow">{card.title}</span>
+            <span>{card.title}</span>
+          </div>
+          <div className="hand-card-front-fuel">
+            <FuelBadge value={card.fuelCost} />
+          </div>
+        </div>
+        <div className="website-hand-card-face website-hand-card-back" aria-hidden="true">
+          <img className="hand-card-back-art" src={card.image} alt="" loading={loading} />
+          <span className="hand-card-shimmer" />
+          <div className="hand-card-back-content">
+            <div className="hand-card-back-top">
+              <strong>{card.title}</strong>
+            </div>
+            <p>{card.description}</p>
+            <div className="hand-card-back-fuel">
+              <FuelBadge value={card.fuelCost} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function CardFan({ cards = featuredCards.slice(0, 6), layoutIndex = 0, reduceMotion }) {
+  const layout = cardFanLayouts[layoutIndex % cardFanLayouts.length]
+
+  return (
+    <div className={`card-fan card-fan-${layoutIndex + 1}`} aria-label="Featured Unkind cards">
+      {cards.map((card, index) => (
         <Motion.figure
           key={card.title}
-          className={`fan-card fan-card-${index + 1}`}
-          animate={reduceMotion ? undefined : { y: [0, index % 2 ? -8 : 8, 0] }}
-          transition={reduceMotion ? undefined : { duration: 5 + index, repeat: Infinity, ease: 'easeInOut' }}
+          className="fan-card"
+          style={layout[index]}
+          whileHover={{
+            y: layout[index].drift - 18,
+            rotate: layout[index].rotate * 0.35,
+            scale: 1.08,
+            zIndex: 20,
+          }}
+          animate={reduceMotion ? undefined : {
+            y: [0, layout[index].drift, 0],
+            rotate: [layout[index].rotate, layout[index].rotate + Math.sign(layout[index].drift) * 1.4, layout[index].rotate],
+          }}
+          transition={reduceMotion ? undefined : {
+            duration: layout[index].duration,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: layoutIndex * 0.35 + index * 0.08,
+          }}
         >
-          <img src={card.image} alt={`${card.title} card art`} />
-          <figcaption>{card.title}</figcaption>
+          <WebsiteHandCard card={card} />
         </Motion.figure>
       ))}
     </div>
   )
 }
 
+const featuredCardFan = featuredCards.slice(6, 12)
+const extraCards = [
+  ...featuredCards.slice(0, 6),
+  ...featuredCards.slice(12, 18),
+]
+
 function Home() {
   const reduceMotion = useReducedMotion()
   const titleScatterItems = useMemo(() => createTitleScatterLayout(), [])
   const [hasTitleReachedShapes, setHasTitleReachedShapes] = useState(false)
   const [hasTitleResolved, setHasTitleResolved] = useState(false)
+  const [showMoreCards, setShowMoreCards] = useState(false)
   const handleTitleRevealComplete = useCallback(() => setHasTitleReachedShapes(true), [])
   const handleTitleResolveComplete = useCallback(() => setHasTitleResolved(true), [])
 
@@ -296,7 +369,7 @@ function Home() {
             {titleScatterItems.map((item, index) => (
               <Motion.figure
                 key={item.id}
-                className={`title-scatter-item ${item.kind === 'card' ? 'is-card' : 'is-shot'}`}
+                className="title-scatter-item is-card"
                 style={item.style}
                 initial={{
                   opacity: 0,
@@ -404,30 +477,63 @@ function Home() {
         <section className="section proof-section">
           <div className="section-heading">
             <p className="eyebrow">How it plays</p>
-            <h2>He needed one roll. You played one card.</h2>
+            <h2>Set the trap. Wait for the mistake.</h2>
           </div>
           <div className="moment-grid">
             <article className="moment-card">
-              <img src={captureOpponent} alt="Unkind gameplay board with an opponent token threatened by a selected card." loading="lazy" />
+              <img src={layTrapShot} alt="Minefield card selected while valid trap cells glow on the Unkind board." loading="lazy" />
               <div>
                 <span>01</span>
-                <h3>They are almost home.</h3>
+                <h3>Place a mine on the board.</h3>
               </div>
             </article>
             <article className="moment-card">
-              <img src={switchShot} alt="Switch card being played on the board." loading="lazy" />
+              <img src={targetInRangeShot} alt="Enemy token in range after moving close to a hidden trap on the Unkind board." loading="lazy" />
               <div>
                 <span>02</span>
-                <h3>You play one card.</h3>
+                <h3>They move into range.</h3>
               </div>
             </article>
             <article className="moment-card">
               <img src={triggerTrapShot} alt="Mine trigger message after a token is eliminated." loading="lazy" />
               <div>
                 <span>03</span>
-                <h3>Their token dies.</h3>
+                <h3>Force the capture.</h3>
               </div>
             </article>
+          </div>
+        </section>
+
+        <section id="cards" className="section cards-section">
+          <div className="section-heading">
+            <p className="eyebrow">The cards</p>
+            <h2>That was just the first bad idea.</h2>
+            <p>
+              Chain cards, set traps inside traps, and turn one small opening into a full table flip.
+            </p>
+          </div>
+          <div className="card-fan-gallery" aria-label="All Unkind cards">
+            <CardFan
+              cards={featuredCardFan}
+              reduceMotion={reduceMotion}
+            />
+            <button
+              className="more-cards-line"
+              type="button"
+              aria-expanded={showMoreCards}
+              onClick={() => setShowMoreCards((isShown) => !isShown)}
+            >
+              {showMoreCards ? 'Hide the extra trouble.' : 'And 12 more ways to ruin a perfectly good turn.'}
+            </button>
+            {showMoreCards ? (
+              <div className="card-grid">
+                {extraCards.map((card) => (
+                  <figure key={card.title} className="deck-card">
+                    <WebsiteHandCard card={card} />
+                  </figure>
+                ))}
+              </div>
+            ) : null}
           </div>
         </section>
 
@@ -453,37 +559,6 @@ function Home() {
                   <p>{mode.copy}</p>
                 </div>
               </Motion.article>
-            ))}
-          </div>
-        </section>
-
-        <section id="cards" className="section cards-section">
-          <div className="section-heading">
-            <p className="eyebrow">The cards</p>
-            <h2>Cards are problems you hand to other people.</h2>
-            <p>
-              Mines. Freezes. Swaps. Stolen 6s. Broken safety. A lead can disappear before the next roll.
-            </p>
-          </div>
-          <div className="cards-showcase">
-            <figure className="card-action-shot">
-              <img src={layTrapShot} alt="A Minefield card selected with valid target cells highlighted on the Unkind board." loading="lazy" />
-              <figcaption>
-                <span>Actual board targeting</span>
-                <strong>Cards happen on the board, right where everyone can suffer.</strong>
-              </figcaption>
-            </figure>
-            <CardFan reduceMotion={reduceMotion} />
-          </div>
-          <div className="card-grid">
-            {featuredCards.map((card) => (
-              <figure key={card.title} className="deck-card">
-                <img src={card.image} alt={`${card.title} card`} loading="lazy" />
-                <figcaption>
-                  <span>{card.type}</span>
-                  <strong>{card.title}</strong>
-                </figcaption>
-              </figure>
             ))}
           </div>
         </section>

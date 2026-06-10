@@ -377,6 +377,8 @@ function Home() {
   const [hasTitleResolved, setHasTitleResolved] = useState(false)
   const [showMoreCards, setShowMoreCards] = useState(false)
   const [hasPassedTitleHero, setHasPassedTitleHero] = useState(false)
+  const [logoStoreUrl, setLogoStoreUrl] = useState(APP_STORE_URL)
+  const [logoAriaLabel, setLogoAriaLabel] = useState('Download Unkind on the App Store')
   const handleTitleRevealComplete = useCallback(() => setHasTitleReachedShapes(true), [])
   const handleTitleResolveComplete = useCallback(() => setHasTitleResolved(true), [])
 
@@ -389,6 +391,14 @@ function Home() {
     updateFooterPosition()
     window.addEventListener('scroll', updateFooterPosition, { passive: true })
     window.addEventListener('resize', updateFooterPosition)
+
+    // Detect device manufacturer / OS
+    const userAgent = window.navigator.userAgent || window.navigator.vendor || window.opera
+    const isApple = /iPad|iPhone|iPod|Mac/i.test(userAgent) || (window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1)
+    if (!isApple) {
+      setLogoStoreUrl(PLAY_STORE_URL)
+      setLogoAriaLabel('Download Unkind on the Google Play Store')
+    }
 
     return () => {
       window.removeEventListener('scroll', updateFooterPosition)
@@ -673,7 +683,7 @@ function Home() {
         </section>
       </main>
       <footer className={`site-footer ${hasPassedTitleHero ? 'is-sticky' : ''}`}>
-        <a className="brand-lockup" href={APP_STORE_URL} target="_blank" rel="noreferrer" aria-label="Download Unkind on the App Store">
+        <a className="brand-lockup" href={logoStoreUrl} target="_blank" rel="noreferrer" aria-label={logoAriaLabel}>
           <img src={logoIcon} alt="" />
           <span>Unkind</span>
         </a>

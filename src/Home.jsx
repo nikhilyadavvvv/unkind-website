@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import AnimatedTitle from './components/AnimatedTitle'
+import Seo from './components/Seo'
 import logoIcon from './assets/optimized/unkind-icon.png'
 import captureOpponent from './assets/optimized/capture-opponent.jpg'
 import layTrapShot from './assets/optimized/lay-trap.jpg'
@@ -20,28 +21,29 @@ import trapTriggerGif from './assets/trap_trig.gif'
 import globalArena from './assets/optimized/global-arena.jpg'
 import privateMatch from './assets/optimized/private-match.jpg'
 import soloPractice from './assets/optimized/solo-practice.jpg'
-import adrenalineCard from './assets/cards/adrenaline.png'
-import backPedalCard from './assets/cards/back_pedal.png'
-import dashCard from './assets/cards/dash.png'
-import deployCard from './assets/cards/deploy.png'
-import freezeCard from './assets/cards/freeze.png'
-import marchCard from './assets/cards/march.png'
-import minefieldCard from './assets/cards/minefield.png'
-import mirrorCard from './assets/cards/mirror.png'
-import nudgeBackCard from './assets/cards/nudge_back.png'
-import nudgeForwardCard from './assets/cards/nudge_forward.png'
-import parasiteCard from './assets/cards/parasite.png'
-import retreatCard from './assets/cards/retreat.png'
-import ruinCard from './assets/cards/ruin_path.png'
-import sacrificeCard from './assets/cards/sacrifice.png'
-import shieldCard from './assets/cards/shield.png'
-import switchCard from './assets/cards/switch.png'
-import uturnCard from './assets/cards/uturn.png'
-import warpCard from './assets/cards/warp.png'
+import adrenalineCard from './assets/cards/optimized/adrenaline.jpg'
+import backPedalCard from './assets/cards/optimized/back_pedal.jpg'
+import dashCard from './assets/cards/optimized/dash.jpg'
+import deployCard from './assets/cards/optimized/deploy.jpg'
+import freezeCard from './assets/cards/optimized/freeze.jpg'
+import marchCard from './assets/cards/optimized/march.jpg'
+import minefieldCard from './assets/cards/optimized/minefield.jpg'
+import mirrorCard from './assets/cards/optimized/mirror.jpg'
+import nudgeBackCard from './assets/cards/optimized/nudge_back.jpg'
+import nudgeForwardCard from './assets/cards/optimized/nudge_forward.jpg'
+import parasiteCard from './assets/cards/optimized/parasite.jpg'
+import retreatCard from './assets/cards/optimized/retreat.jpg'
+import ruinCard from './assets/cards/optimized/ruin_path.jpg'
+import sacrificeCard from './assets/cards/optimized/sacrifice.jpg'
+import shieldCard from './assets/cards/optimized/shield.jpg'
+import switchCard from './assets/cards/optimized/switch.jpg'
+import uturnCard from './assets/cards/optimized/uturn.jpg'
+import warpCard from './assets/cards/optimized/warp.jpg'
 import appleStoreIcon from './assets/apple-173.svg'
 
 const APP_STORE_URL = 'https://apps.apple.com/de/app/unkind/id6760196649?l=en-GB'
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.projektlyoon.unkind'
+const SITE_URL = 'https://www.projektlyoon.com'
 
 const playModes = [
   {
@@ -301,6 +303,73 @@ const extraCards = [
   ...featuredCards.slice(12, 18),
 ]
 
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Projekt Lyoon',
+      url: SITE_URL,
+      sameAs: ['https://github.com/projektlyoon/ProjektLyoonAssetShowcase'],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      name: 'Unkind',
+      url: SITE_URL,
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'VideoGame',
+      '@id': `${SITE_URL}/#game`,
+      name: 'Unkind',
+      alternateName: 'UNKIND',
+      slogan: 'Friendship-ending Ludo',
+      url: SITE_URL,
+      description: 'Unkind is a tactical board game by Projekt Lyoon with dice movement, card play, fuel economy, solo practice, global multiplayer, private matches, and an Unkind mode where tokens can die.',
+      genre: ['Strategy', 'Board game', 'Card game', 'Dice game', 'Multiplayer'],
+      applicationCategory: 'Game',
+      operatingSystem: ['iOS', 'Android'],
+      gamePlatform: ['iOS', 'Android'],
+      playMode: ['SinglePlayer', 'MultiPlayer'],
+      numberOfPlayers: {
+        '@type': 'QuantitativeValue',
+        minValue: 1,
+        maxValue: 4,
+      },
+      downloadUrl: [APP_STORE_URL, PLAY_STORE_URL],
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      creator: {
+        '@type': 'Person',
+        name: 'Nikhil Yadav',
+      },
+      sameAs: [
+        APP_STORE_URL,
+        PLAY_STORE_URL,
+        'https://github.com/projektlyoon/ProjektLyoonAssetShowcase',
+      ],
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${SITE_URL}/#cards`,
+      name: 'Unkind card list',
+      itemListElement: featuredCards.map((card, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Thing',
+          name: card.title,
+          description: card.description,
+          category: card.type,
+        },
+      })),
+    },
+  ],
+}
+
 function Home() {
   const reduceMotion = useReducedMotion()
   const titleScatterItems = useMemo(() => createTitleScatterLayout(), [])
@@ -329,6 +398,11 @@ function Home() {
 
   return (
     <div className="site-shell celestial-site">
+      <Seo
+        title="Unkind | Friendship-ending Ludo by Projekt Lyoon"
+        description="Unkind is a tactical board game with dice movement, fuel economy, brutal cards, solo practice, global multiplayer, private matches, and an Unkind mode where tokens can die."
+        jsonLd={homeJsonLd}
+      />
       <main>
         <section className="title-hero">
           <div className={`title-scatter-field ${hasTitleResolved ? 'is-scattered' : ''}`} aria-hidden="true">

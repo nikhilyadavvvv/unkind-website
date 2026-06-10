@@ -1,5 +1,19 @@
 import { motion as Motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import Seo from './components/Seo'
+
+const privacyJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'PrivacyPolicy',
+  name: 'Privacy Policy for Unkind',
+  url: 'https://www.projektlyoon.com/privacy',
+  dateModified: '2026-03-04',
+  publisher: {
+    '@type': 'Person',
+    name: 'Nikhil Yadav',
+  },
+  inLanguage: 'en',
+}
 
 const sections = [
   {
@@ -96,6 +110,13 @@ const sections = [
 function Privacy() {
   return (
     <div className="privacy-shell">
+      <Seo
+        title="Unkind Privacy Policy | Projekt Lyoon"
+        description="Privacy policy for the Unkind mobile app, covering local settings, Firebase multiplayer data, tracking, permissions, account deletion, and contact details."
+        path="/privacy"
+        type="article"
+        jsonLd={privacyJsonLd}
+      />
       <header className="privacy-nav">
         <Link to="/" className="pill-link">
           Back to Home

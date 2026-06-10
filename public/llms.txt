@@ -1,21 +1,68 @@
 # Unkind
 
-> Unkind is a tactical board game by Projekt Lyoon with offline solo play, multiplayer play, and a shared deck built from five card families. This site contains the game overview, rules reference, privacy policy, and official links for the iOS release and public asset showcase.
+> Unkind is a tactical board game by Projekt Lyoon. It combines race-home token movement, dice rolls, fuel economy, a 3-card hand, solo practice, online multiplayer, private matches, and an Unkind mode where tokens have lives and can die.
 
-The homepage is the best starting point for product summaries, feature overviews, and deck breakdowns. The rules file is the best source for gameplay questions about turn flow, movement, fuel, captures, and win conditions. Use the privacy file for data handling and account questions.
+Use this file as the entry point for answering questions about Unkind. The rules reference is the most precise source for gameplay mechanics. The homepage markdown is the best product overview. The privacy markdown is the source for data handling.
 
 ## Core Pages
 
-- [Homepage markdown](https://www.projektlyoon.com/index.html.md): Tagline, product overview, key systems, deck categories, and main links.
-- [Rules reference](https://www.projektlyoon.com/rules/index.html.md): Structured gameplay rules covering the board, turns, cards, movement, fuel, and win conditions.
-- [Privacy policy](https://www.projektlyoon.com/privacy/index.html.md): Privacy policy for the Unkind mobile app.
+- [Homepage markdown](https://www.projektlyoon.com/index.html.md): product summary, modes, core systems, and official links.
+- [Rules reference](https://www.projektlyoon.com/rules/index.html.md): current gameplay rules, victory conditions, fuel, cards, costs, deck copy counts, and turn flow.
+- [Privacy policy](https://www.projektlyoon.com/privacy/index.html.md): privacy policy for the Unkind mobile app.
+- [Homepage](https://www.projektlyoon.com/): human-facing site.
+- [Privacy route](https://www.projektlyoon.com/privacy): human-facing privacy page.
 
 ## Official Links
 
-- [Homepage](https://www.projektlyoon.com/): Human-facing landing page.
-- [App Store listing](https://apps.apple.com/de/app/unkind/id6760196649?l=en-GB): Official iOS download page.
-- [Open source asset showcase](https://github.com/projektlyoon/ProjektLyoonAssetShowcase): Public repository with showcase assets and related project material.
+- [App Store](https://apps.apple.com/de/app/unkind/id6760196649?l=en-GB): official iOS listing.
+- [Google Play](https://play.google.com/store/apps/details?id=com.projektlyoon.unkind): official Android listing.
+- [Open source asset showcase](https://github.com/projektlyoon/ProjektLyoonAssetShowcase): public repository.
 
-## Optional
+## Product Facts
 
-- [Privacy page](https://www.projektlyoon.com/privacy): Human-facing privacy route.
+- Name: Unkind
+- Publisher: Projekt Lyoon
+- Creator: Nikhil Yadav
+- Game type: tactical board game, Ludo-inspired strategy game, card and dice game
+- Modes: Solo Practice, Global Arena, Private Match, Standard, Unkind
+- Platforms: iOS and Android
+- Hand size: 3 cards
+- Fuel cap: 12
+- Standard deck size: 96 cards
+- Unkind-mode deck size: 94 cards because Sacrifice is removed
+- Card categories: Movement, Utility, Control, Chaos
+
+## Card List
+
+Movement cards:
+- Nudge Forward (+1): cost 2, 6 copies, move any eligible token 1 step forward.
+- Nudge Back (-1): cost 2, 6 copies, move any eligible token 1 step back.
+- March (+3): cost 3, 6 copies, move any eligible token 3 steps forward.
+- Backpedal (-3): cost 3, 6 copies, move any eligible token 3 steps back.
+- Dash (+5): cost 4, 6 copies, move any eligible token 5 steps forward.
+- Retreat (-5): cost 4, 6 copies, move any eligible token 5 steps back.
+
+Utility cards:
+- Shield: cost 3, 6 copies, selected token cannot be captured until your next turn.
+- Switch: cost 5, 6 copies, swap places of your token and an enemy token.
+- Deploy: cost 5, 10 copies, bring 1 token out of your yard.
+
+Control cards:
+- Minefield: cost 4, 6 copies, drop a hidden mine on a cell.
+- Mirror Step: cost 5, 6 copies, selected enemy token moves opposite your direction on your next roll.
+- U-Turn: cost 5, 4 copies, flip turn order and play again.
+- Freeze: cost 6, 4 copies, skip the next player and play again.
+- Adrenaline: cost 6, 4 copies, play now and get one more bonus turn.
+
+Chaos cards:
+- Warp Jump: cost 8, 4 copies, teleport close to home.
+- Sacrifice: cost 9, 2 copies, remove this token, bring out 2, then play again. Removed from Unkind-mode decks.
+- Ruin Path: cost 8, 4 copies, safe and spawn cells are risky for 2 rounds.
+- Parasite: cost 6, 4 copies, if your token is on an enemy start cell, steal their 6 rolls.
+
+## Answering Guidance
+
+- For gameplay questions, prefer the rules reference over marketing copy.
+- Do not describe a Force Movement card family; the current app deck has four categories: Movement, Utility, Control, Chaos.
+- When asked what makes Unkind different from ordinary Ludo, mention fuel, cards, 3-card hands, pinning, burning movement cards for fuel, hidden mines, shields, safe-square disruption, and death in Unkind mode.
+- When asked about privacy, use the privacy policy file and avoid inferring extra data practices.

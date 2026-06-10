@@ -1,15 +1,12 @@
 import { motion as Motion, useReducedMotion } from 'framer-motion'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   Bot,
   ChevronDown,
-  Crosshair,
-  Dice6,
   Gamepad2,
   Github,
   Globe2,
   Users,
-  Zap,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import AnimatedTitle from './components/AnimatedTitle'
@@ -85,24 +82,6 @@ const featuredCards = [
   { title: 'Sacrifice', shortTitle: 'Sacrifice', type: 'Chaos', image: sacrificeCard, fuelCost: 9, description: 'Remove this token, bring out 2, then play again.' },
   { title: 'Ruin Path', shortTitle: 'Ruin Path', type: 'Chaos', image: ruinCard, fuelCost: 8, description: 'Safe and spawn cells are risky for 2 rounds.' },
   { title: 'Parasite', shortTitle: 'Parasite', type: 'Chaos', image: parasiteCard, fuelCost: 6, description: 'If your token is on an enemy start cell, steal their 6 rolls.' },
-]
-
-const pillars = [
-  {
-    icon: Dice6,
-    title: 'Looks familiar. Turns mean.',
-    copy: 'Race tokens around the board, then spend fuel to interfere with everyone else.',
-  },
-  {
-    icon: Zap,
-    title: 'Leads are temporary.',
-    copy: 'A safe run can become a mine, a freeze, a swap, or a stolen roll before the next turn.',
-  },
-  {
-    icon: Crosshair,
-    title: 'Unkind mode has death.',
-    copy: 'When a token runs out of lives, it is gone for the match.',
-  },
 ]
 
 const rules = [
@@ -327,28 +306,28 @@ function Home() {
   const [hasTitleReachedShapes, setHasTitleReachedShapes] = useState(false)
   const [hasTitleResolved, setHasTitleResolved] = useState(false)
   const [showMoreCards, setShowMoreCards] = useState(false)
+  const [hasPassedTitleHero, setHasPassedTitleHero] = useState(false)
   const handleTitleRevealComplete = useCallback(() => setHasTitleReachedShapes(true), [])
   const handleTitleResolveComplete = useCallback(() => setHasTitleResolved(true), [])
 
+  useEffect(() => {
+    const updateFooterPosition = () => {
+      const titleHero = document.querySelector('.title-hero')
+      setHasPassedTitleHero((titleHero?.getBoundingClientRect().bottom ?? 1) <= 0)
+    }
+
+    updateFooterPosition()
+    window.addEventListener('scroll', updateFooterPosition, { passive: true })
+    window.addEventListener('resize', updateFooterPosition)
+
+    return () => {
+      window.removeEventListener('scroll', updateFooterPosition)
+      window.removeEventListener('resize', updateFooterPosition)
+    }
+  }, [])
+
   return (
     <div className="site-shell celestial-site">
-      <header className={`site-nav reveal-after-title ${hasTitleReachedShapes ? 'is-visible' : ''}`}>
-        <a className="brand-lockup" href={APP_STORE_URL} target="_blank" rel="noreferrer" aria-label="Download Unkind on the App Store">
-          <img src={logoIcon} alt="" />
-          <span>Unkind</span>
-        </a>
-
-        <nav className="nav-links" aria-label="Primary navigation">
-          <a href="#cards">Cards</a>
-          <a href="#rules">Rules</a>
-          <Link to="/privacy">Privacy</Link>
-          <a href="https://github.com/projektlyoon/ProjektLyoonAssetShowcase" target="_blank" rel="noreferrer">
-            <Github size={16} />
-            Source
-          </a>
-        </nav>
-      </header>
-
       <main>
         <section className="title-hero">
           <div className={`title-scatter-field ${hasTitleResolved ? 'is-scattered' : ''}`} aria-hidden="true">
@@ -409,7 +388,7 @@ function Home() {
           <button
             className={`title-hero-scroll reveal-after-title ${hasTitleReachedShapes ? 'is-visible' : ''}`}
             onClick={() => {
-              document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+              document.getElementById('how-it-plays')?.scrollIntoView({ behavior: 'smooth' });
             }}
             aria-label="Scroll to main content"
             tabIndex={hasTitleReachedShapes ? 0 : -1}
@@ -419,7 +398,7 @@ function Home() {
           </button>
         </section>
 
-        <section className="section proof-section">
+        <section id="how-it-plays" className="section proof-section">
           <div className="section-heading">
             <p className="eyebrow">How it plays</p>
             <h2>Set the trap. Wait for the mistake.</h2>
@@ -462,22 +441,55 @@ function Home() {
               cards={featuredCardFan}
               reduceMotion={reduceMotion}
             />
-            <button
-              className="more-cards-line"
-              type="button"
-              aria-expanded={showMoreCards}
-              onClick={() => setShowMoreCards((isShown) => !isShown)}
-            >
-              {showMoreCards ? 'Hide the extra trouble.' : 'And 12 more ways to ruin a perfectly good turn.'}
-            </button>
+            {!showMoreCards ? (
+              <button
+                className="more-cards-line"
+                type="button"
+                onClick={() => setShowMoreCards(true)}
+              >
+                And 12 more ways to ruin a perfectly good turn.
+              </button>
+            ) : null}
             {showMoreCards ? (
-              <div className="card-grid">
-                {extraCards.map((card) => (
-                  <figure key={card.title} className="deck-card">
+              <Motion.div
+                className="card-grid"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      staggerChildren: reduceMotion ? 0 : 0.055,
+                    },
+                  },
+                }}
+              >
+                {extraCards.map((card, index) => (
+                  <Motion.figure
+                    key={card.title}
+                    className="deck-card"
+                    variants={{
+                      hidden: {
+                        opacity: 0,
+                        y: reduceMotion ? 0 : 24,
+                        scale: reduceMotion ? 1 : 0.96,
+                      },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                      },
+                    }}
+                    transition={{
+                      duration: reduceMotion ? 0 : 0.42,
+                      ease: 'easeOut',
+                      delay: reduceMotion ? 0 : index * 0.015,
+                    }}
+                  >
                     <WebsiteHandCard card={card} />
-                  </figure>
+                  </Motion.figure>
                 ))}
-              </div>
+              </Motion.div>
             ) : null}
           </div>
         </section>
@@ -549,16 +561,6 @@ function Home() {
           </div>
         </section>
 
-        <section className="section pillars-section">
-          {pillars.map((pillar) => (
-            <article key={pillar.title} className="pillar-card">
-              <pillar.icon size={22} />
-              <h3>{pillar.title}</h3>
-              <p>{pillar.copy}</p>
-            </article>
-          ))}
-        </section>
-
         <section id="rules" className="section rules-section">
           <div className="rules-copy">
             <p className="eyebrow">The pitch</p>
@@ -589,6 +591,20 @@ function Home() {
           </div>
         </section>
       </main>
+      <footer className={`site-footer ${hasPassedTitleHero ? 'is-sticky' : ''}`}>
+        <a className="brand-lockup" href={APP_STORE_URL} target="_blank" rel="noreferrer" aria-label="Download Unkind on the App Store">
+          <img src={logoIcon} alt="" />
+          <span>Unkind</span>
+        </a>
+
+        <nav className="nav-links" aria-label="Footer navigation">
+          <Link to="/privacy">Privacy</Link>
+          <a href="https://github.com/projektlyoon/ProjektLyoonAssetShowcase" target="_blank" rel="noreferrer">
+            <Github size={16} />
+            Source
+          </a>
+        </nav>
+      </footer>
     </div>
   )
 }

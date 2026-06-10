@@ -16,6 +16,7 @@ import layTrapShot from './assets/optimized/lay-trap.jpg'
 import targetInRangeShot from './assets/target_in_range.webp'
 import switchShot from './assets/optimized/switch.jpg'
 import triggerTrapShot from './assets/optimized/trigger-trap.jpg'
+import trapTriggerGif from './assets/trap_trig.gif'
 import globalArena from './assets/optimized/global-arena.jpg'
 import privateMatch from './assets/optimized/private-match.jpg'
 import soloPractice from './assets/optimized/solo-practice.jpg'
@@ -419,7 +420,7 @@ function Home() {
               </div>
             </article>
             <article className="moment-card">
-              <img src={triggerTrapShot} alt="Mine trigger message after a token is eliminated." loading="lazy" />
+              <img src={trapTriggerGif} alt="Animated mine trigger sequence after a token is eliminated." loading="lazy" />
               <div>
                 <span>03</span>
                 <h3>Force the capture.</h3>
@@ -522,14 +523,20 @@ function Home() {
 
         <section id="about" className="hero">
           <div className="hero-art">
-            <div className="phone-frame">
+            <figure className="phone-frame">
               <img src={captureOpponent} alt="A live Unkind match with a card selected, opponent tokens threatened, and fuel at maximum." />
-            </div>
+            </figure>
             <figure className="hero-card hero-card-left">
               <img src={switchShot} alt="A Switch card being played over the Unkind board." />
             </figure>
             <figure className="hero-card hero-card-right">
               <img src={triggerTrapShot} alt="A mine trigger message showing a token was eliminated." />
+            </figure>
+            <figure className="hero-card hero-card-top">
+              <img src={layTrapShot} alt="Minefield card selected with valid target cells highlighted on the Unkind board." loading="lazy" />
+            </figure>
+            <figure className="hero-card hero-card-bottom">
+              <img src={targetInRangeShot} alt="Enemy token in range after moving close to a hidden trap on the Unkind board." loading="lazy" />
             </figure>
           </div>
 

@@ -209,8 +209,9 @@ main {
 
 .hero-art {
   position: relative;
-  min-height: clamp(600px, 72vh, 840px);
+  min-height: clamp(520px, 68vh, 740px);
   order: 2;
+  isolation: isolate;
 }
 
 .hero-logo {
@@ -293,8 +294,10 @@ main {
 .phone-frame {
   position: absolute;
   inset: 50% auto auto 50%;
-  width: min(360px, 56vw);
+  z-index: 5;
+  width: min(270px, 34vw);
   aspect-ratio: 396 / 844;
+  margin: 0;
   transform: translate(-50%, -50%);
   overflow: hidden;
   border: 1px solid rgba(232, 198, 126, 0.28);
@@ -316,8 +319,9 @@ main {
 
 .hero-card {
   position: absolute;
-  width: min(210px, 30vw);
+  width: min(225px, 28vw);
   aspect-ratio: 396 / 844;
+  margin: 0;
   overflow: hidden;
   border: 1px solid rgba(232, 198, 126, 0.24);
   border-radius: var(--radius);
@@ -347,15 +351,31 @@ main {
 }
 
 .hero-card-left {
-  top: 7%;
-  left: 2%;
-  transform: rotate(-12deg);
+  top: 30%;
+  left: 0;
+  z-index: 2;
+  transform: rotate(-14deg);
 }
 
 .hero-card-right {
   right: 0;
-  bottom: 5%;
-  transform: rotate(11deg);
+  bottom: 30%;
+  z-index: 3;
+  transform: rotate(14deg);
+}
+
+.hero-card-top {
+  top: 0;
+  left: 8%;
+  z-index: 1;
+  transform: rotate(-5deg);
+}
+
+.hero-card-bottom {
+  right: 8%;
+  bottom: 0;
+  z-index: 1;
+  transform: rotate(5deg);
 }
 
 .section {
@@ -901,7 +921,7 @@ main {
   }
 
   .hero-art {
-    min-height: 680px;
+    min-height: 620px;
   }
 
   .mode-grid,
@@ -940,15 +960,7 @@ main {
   }
 
   .hero-art {
-    min-height: 600px;
-  }
-
-  .phone-frame {
-    width: min(310px, 78vw);
-  }
-
-  .hero-card {
-    width: min(180px, 38vw);
+    min-height: 560px;
   }
 
   .card-fan {
@@ -1003,15 +1015,22 @@ main {
   }
 
   .hero-art {
-    min-height: 520px;
+    min-height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 
-  .hero-card-left {
-    left: -3%;
-  }
-
-  .hero-card-right {
-    right: -3%;
+  .phone-frame,
+  .hero-card,
+  .hero-card-left,
+  .hero-card-right,
+  .hero-card-top,
+  .hero-card-bottom {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    transform: none;
   }
 
   .store-row {

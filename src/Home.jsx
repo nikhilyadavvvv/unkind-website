@@ -377,8 +377,27 @@ function Home() {
   const [hasTitleResolved, setHasTitleResolved] = useState(false)
   const [showMoreCards, setShowMoreCards] = useState(false)
   const [hasPassedTitleHero, setHasPassedTitleHero] = useState(false)
-  const [logoStoreUrl, setLogoStoreUrl] = useState(APP_STORE_URL)
-  const [logoAriaLabel, setLogoAriaLabel] = useState('Download Unkind on the App Store')
+  const { logoStoreUrl, logoAriaLabel } = useMemo(() => {
+    if (typeof window === 'undefined') {
+      return {
+        logoStoreUrl: APP_STORE_URL,
+        logoAriaLabel: 'Download Unkind on the App Store',
+      }
+    }
+
+    const userAgent = window.navigator.userAgent || window.navigator.vendor || window.opera
+    const isApple = /iPad|iPhone|iPod|Mac/i.test(userAgent) || (window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1)
+
+    return isApple
+      ? {
+          logoStoreUrl: APP_STORE_URL,
+          logoAriaLabel: 'Download Unkind on the App Store',
+        }
+      : {
+          logoStoreUrl: PLAY_STORE_URL,
+          logoAriaLabel: 'Download Unkind on the Google Play Store',
+        }
+  }, [])
   const handleTitleRevealComplete = useCallback(() => setHasTitleReachedShapes(true), [])
   const handleTitleResolveComplete = useCallback(() => setHasTitleResolved(true), [])
 
@@ -391,14 +410,6 @@ function Home() {
     updateFooterPosition()
     window.addEventListener('scroll', updateFooterPosition, { passive: true })
     window.addEventListener('resize', updateFooterPosition)
-
-    // Detect device manufacturer / OS
-    const userAgent = window.navigator.userAgent || window.navigator.vendor || window.opera
-    const isApple = /iPad|iPhone|iPod|Mac/i.test(userAgent) || (window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1)
-    if (!isApple) {
-      setLogoStoreUrl(PLAY_STORE_URL)
-      setLogoAriaLabel('Download Unkind on the Google Play Store')
-    }
 
     return () => {
       window.removeEventListener('scroll', updateFooterPosition)

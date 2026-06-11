@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -428,7 +426,8 @@ main {
     linear-gradient(90deg, rgba(10, 10, 11, 0.24), transparent 50%);
 }
 
-.moment-card img {
+.moment-card img,
+.moment-card video {
   width: 100%;
   height: 100%;
   display: block;

@@ -1,23 +1,99 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>Unkind</title>
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // https://github.com/rafgraph/spa-github-pages
-      var pathSegmentsToKeep = 0;
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
+    <title>Page Not Found | Unkind</title>
+    <meta
+      name="description"
+      content="The requested Unkind page could not be found. Continue to the homepage, privacy policy, rules reference, or official app store links."
+    />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <style>
+      :root {
+        color: #ffffff;
+        background: #0a0a0b;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
 
-      var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?p=/' +
-        l.pathname.split('/').slice(1 + pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 18% 20%, rgba(232, 198, 126, 0.14), transparent 28%),
+          radial-gradient(circle at 82% 18%, rgba(165, 180, 252, 0.14), transparent 30%),
+          #0a0a0b;
+      }
+
+      main {
+        width: min(680px, 100%);
+      }
+
+      img {
+        width: 72px;
+        height: 72px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        margin: 20px 0 10px;
+        font-size: clamp(2.25rem, 8vw, 4.5rem);
+        line-height: 0.95;
+      }
+
+      p {
+        max-width: 58ch;
+        color: #a5b4fc;
+        line-height: 1.65;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      a {
+        border: 1px solid rgba(232, 198, 126, 0.28);
+        border-radius: 12px;
+        padding: 10px 14px;
+        color: #e8c67e;
+        font-weight: 700;
+        text-decoration: none;
+        background: rgba(18, 20, 31, 0.72);
+      }
+    </style>
+    <script>
+      (function (location) {
+        var knownRoutes = ["/privacy"];
+        if (knownRoutes.indexOf(location.pathname.replace(/\/$/, "")) === -1) return;
+
+        var query = "/?p=" + location.pathname.replace(/&/g, "~and~");
+        if (location.search) query += "&q=" + location.search.slice(1).replace(/&/g, "~and~");
+        location.replace(location.protocol + "//" + location.hostname + (location.port ? ":" + location.port : "") + query + location.hash);
+      })(window.location);
     </script>
   </head>
   <body>
+    <main>
+      <img src="/assets/unkind-icon.avif" alt="Unkind app icon" width="72" height="72" />
+      <h1>Page not found</h1>
+      <p>
+        This Unkind page is missing or has moved. The main game page, rules reference,
+        privacy policy, and official download links are still available.
+      </p>
+      <nav aria-label="Helpful links">
+        <a href="/">Home</a>
+        <a href="/rules/index.html.md">Rules</a>
+        <a href="/privacy">Privacy</a>
+        <a href="https://apps.apple.com/de/app/unkind/id6760196649?l=en-GB">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=com.projektlyoon.unkind">Google Play</a>
+      </nav>
+    </main>
   </body>
 </html>

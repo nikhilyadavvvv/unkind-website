@@ -11,34 +11,34 @@ import {
 import { Link } from 'react-router-dom'
 import AnimatedTitle from './components/AnimatedTitle'
 import Seo from './components/Seo'
-import logoIcon from './assets/optimized/unkind-icon.png'
-import captureOpponent from './assets/optimized/capture-opponent.jpg'
-import layTrapShot from './assets/optimized/lay-trap.jpg'
+import logoIcon from './assets/modern/unkind-icon.avif'
+import captureOpponent from './assets/modern/capture-opponent.avif'
+import layTrapShot from './assets/modern/lay-trap.avif'
 import targetInRangeShot from './assets/target_in_range.webp'
-import switchShot from './assets/optimized/switch.jpg'
-import triggerTrapShot from './assets/optimized/trigger-trap.jpg'
-import trapTriggerGif from './assets/trap_trig.gif'
-import globalArena from './assets/optimized/global-arena.jpg'
-import privateMatch from './assets/optimized/private-match.jpg'
-import soloPractice from './assets/optimized/solo-practice.jpg'
-import adrenalineCard from './assets/cards/optimized/adrenaline.jpg'
-import backPedalCard from './assets/cards/optimized/back_pedal.jpg'
-import dashCard from './assets/cards/optimized/dash.jpg'
-import deployCard from './assets/cards/optimized/deploy.jpg'
-import freezeCard from './assets/cards/optimized/freeze.jpg'
-import marchCard from './assets/cards/optimized/march.jpg'
-import minefieldCard from './assets/cards/optimized/minefield.jpg'
-import mirrorCard from './assets/cards/optimized/mirror.jpg'
-import nudgeBackCard from './assets/cards/optimized/nudge_back.jpg'
-import nudgeForwardCard from './assets/cards/optimized/nudge_forward.jpg'
-import parasiteCard from './assets/cards/optimized/parasite.jpg'
-import retreatCard from './assets/cards/optimized/retreat.jpg'
-import ruinCard from './assets/cards/optimized/ruin_path.jpg'
-import sacrificeCard from './assets/cards/optimized/sacrifice.jpg'
-import shieldCard from './assets/cards/optimized/shield.jpg'
-import switchCard from './assets/cards/optimized/switch.jpg'
-import uturnCard from './assets/cards/optimized/uturn.jpg'
-import warpCard from './assets/cards/optimized/warp.jpg'
+import switchShot from './assets/modern/switch.avif'
+import triggerTrapShot from './assets/modern/trigger-trap.avif'
+import trapTriggerVideo from './assets/modern/trap_trig.mp4'
+import globalArena from './assets/modern/global-arena.avif'
+import privateMatch from './assets/modern/private-match.avif'
+import soloPractice from './assets/modern/solo-practice.avif'
+import adrenalineCard from './assets/cards/modern/adrenaline.avif'
+import backPedalCard from './assets/cards/modern/back_pedal.avif'
+import dashCard from './assets/cards/modern/dash.avif'
+import deployCard from './assets/cards/modern/deploy.avif'
+import freezeCard from './assets/cards/modern/freeze.avif'
+import marchCard from './assets/cards/modern/march.avif'
+import minefieldCard from './assets/cards/modern/minefield.avif'
+import mirrorCard from './assets/cards/modern/mirror.avif'
+import nudgeBackCard from './assets/cards/modern/nudge_back.avif'
+import nudgeForwardCard from './assets/cards/modern/nudge_forward.avif'
+import parasiteCard from './assets/cards/modern/parasite.avif'
+import retreatCard from './assets/cards/modern/retreat.avif'
+import ruinCard from './assets/cards/modern/ruin_path.avif'
+import sacrificeCard from './assets/cards/modern/sacrifice.avif'
+import shieldCard from './assets/cards/modern/shield.avif'
+import switchCard from './assets/cards/modern/switch.avif'
+import uturnCard from './assets/cards/modern/uturn.avif'
+import warpCard from './assets/cards/modern/warp.avif'
 import appleStoreIcon from './assets/apple-173.svg'
 
 const APP_STORE_URL = 'https://apps.apple.com/de/app/unkind/id6760196649?l=en-GB'
@@ -203,8 +203,7 @@ function StoreIcon({ platform }) {
     <img
       className="store-button-icon"
       src={appleStoreIcon}
-      alt=""
-      aria-hidden="true"
+      alt="Apple logo"
     />
   )
 }
@@ -249,7 +248,7 @@ function WebsiteHandCard({ card, loading = 'lazy' }) {
           </div>
         </div>
         <div className="website-hand-card-face website-hand-card-back" aria-hidden="true">
-          <img className="hand-card-back-art" src={card.image} alt="" loading={loading} />
+          <img className="hand-card-back-art" src={card.image} alt={`${card.title} card background`} loading={loading} />
           <span className="hand-card-shimmer" />
           <div className="hand-card-back-content">
             <div className="hand-card-back-top">
@@ -456,7 +455,7 @@ function Home() {
                   delay: reduceMotion ? 0 : 0.06 + index * 0.035,
                 }}
               >
-                <img src={item.image} alt="" loading="eager" />
+                <img src={item.image} alt={item.alt} loading="eager" />
               </Motion.figure>
             ))}
           </div>
@@ -515,7 +514,15 @@ function Home() {
               </div>
             </article>
             <article className="moment-card">
-              <img src={trapTriggerGif} alt="Animated mine trigger sequence after a token is eliminated." loading="lazy" />
+              <video
+                src={trapTriggerVideo}
+                aria-label="Animated mine trigger sequence after a token is eliminated."
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              />
               <div>
                 <span>03</span>
                 <h3>Force the capture.</h3>
@@ -605,7 +612,7 @@ function Home() {
                 viewport={{ once: true, amount: 0.28 }}
                 transition={{ duration: 0.55, delay: index * 0.06 }}
               >
-                <img src={mode.image} alt="" loading="lazy" />
+                <img src={mode.image} alt={`${mode.title} mode in Unkind`} loading="lazy" />
                 <div className="mode-card-shade" />
                 <div className="mode-card-copy">
                   <span><mode.icon size={17} /> {mode.title}</span>
@@ -695,7 +702,7 @@ function Home() {
       </main>
       <footer className={`site-footer ${hasPassedTitleHero ? 'is-sticky' : ''}`}>
         <a className="brand-lockup" href={logoStoreUrl} target="_blank" rel="noreferrer" aria-label={logoAriaLabel}>
-          <img src={logoIcon} alt="" />
+          <img src={logoIcon} alt="Unkind app icon" />
           <span>Unkind</span>
         </a>
 

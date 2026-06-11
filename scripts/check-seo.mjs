@@ -11,6 +11,7 @@ const requiredFiles = [
   'index.html.md',
   'rules/index.html.md',
   'privacy/index.html.md',
+  '404.html',
 ]
 
 const missingFiles = requiredFiles.filter((file) => !existsSync(join(distDir.pathname, file)))
@@ -20,6 +21,7 @@ if (missingFiles.length > 0) {
 }
 
 const indexHtml = readFileSync(join(distDir.pathname, 'index.html'), 'utf8')
+const notFoundHtml = readFileSync(join(distDir.pathname, '404.html'), 'utf8')
 const robots = readFileSync(join(distDir.pathname, 'robots.txt'), 'utf8')
 const sitemap = readFileSync(join(distDir.pathname, 'sitemap.xml'), 'utf8')
 
@@ -33,8 +35,10 @@ const checks = [
   ['static fallback h1', /<div\s+id="root">[\s\S]*<h1>Unkind<\/h1>/i.test(indexHtml)],
   ['static fallback h2', /<div\s+id="root">[\s\S]*<h2>/i.test(indexHtml)],
   ['static fallback paragraph', /<div\s+id="root">[\s\S]*<p>/i.test(indexHtml)],
-  ['static fallback image', /<div\s+id="root">[\s\S]*<img\s+src="\/favicon\.png"/i.test(indexHtml)],
+  ['static fallback image', /<div\s+id="root">[\s\S]*<img\s+src="\/assets\/unkind-icon\.avif"/i.test(indexHtml)],
   ['static fallback links', /<div\s+id="root">[\s\S]*<a\s+href="\/rules\/index\.html\.md"/i.test(indexHtml)],
+  ['no empty image alt attributes', !/<img\b[^>]*alt=""/i.test(indexHtml)],
+  ['custom 404 content', /<h1>Page not found<\/h1>/i.test(notFoundHtml) && /<a href="\/">Home<\/a>/i.test(notFoundHtml)],
   ['robots sitemap', /Sitemap:\s*https:\/\/www\.projektlyoon\.com\/sitemap\.xml/i.test(robots)],
   ['sitemap XML', /^<\?xml[\s\S]*<urlset/i.test(sitemap.trim())],
   ['sitemap homepage', /<loc>https:\/\/www\.projektlyoon\.com\/<\/loc>/i.test(sitemap)],

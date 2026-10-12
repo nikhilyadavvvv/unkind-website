@@ -1455,3 +1455,144 @@ main {
     transition: none;
   }
 }
+
+/* StringTune-inspired art direction: high-contrast, editorial, and kinetic. */
+:root {
+  --screen: #090909;
+  --panel: #11100f;
+  --panel-raised: #191715;
+  --line: rgba(255, 242, 218, 0.16);
+  --gold: #f4c36c;
+  --gold-soft: rgba(244, 195, 108, 0.16);
+  --blue: #e5ddd0;
+  --blue-soft: rgba(229, 221, 208, 0.1);
+  --ink: #fffaf1;
+  --muted: #aea79d;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% -12%, rgba(239, 98, 37, 0.18), transparent 38%),
+    radial-gradient(ellipse at 84% 24%, rgba(244, 195, 108, 0.11), transparent 26%),
+    #090909;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.26;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 4px);
+  mix-blend-mode: soft-light;
+}
+
+.site-shell::before {
+  background-image:
+    linear-gradient(to right, rgba(255, 245, 230, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 245, 230, 0.035) 1px, transparent 1px);
+  background-size: 6.25rem 6.25rem;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
+}
+
+.title-hero {
+  min-height: 100svh;
+  border-bottom-color: rgba(244, 195, 108, 0.25);
+  background:
+    linear-gradient(90deg, transparent 49.94%, rgba(244, 195, 108, 0.15) 50%, transparent 50.06%),
+    radial-gradient(ellipse at 50% 52%, rgba(244, 195, 108, 0.1), transparent 36%),
+    linear-gradient(180deg, #100f0e 0%, #090909 88%);
+}
+
+.title-hero::before,
+.title-hero::after {
+  position: absolute;
+  z-index: 2;
+  color: rgba(255, 250, 241, 0.44);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.title-hero::before { content: 'Projekt Lyoon / 01'; top: 1.5rem; left: clamp(1rem, 4vw, 4rem); }
+.title-hero::after { content: 'A tactical social game'; right: clamp(1rem, 4vw, 4rem); bottom: 1.7rem; writing-mode: vertical-rl; }
+
+.title-scatter-field::before {
+  background:
+    radial-gradient(circle at 50% 48%, rgba(240, 94, 31, 0.24), transparent 25%),
+    radial-gradient(circle at 48% 55%, rgba(244, 195, 108, 0.14), transparent 48%);
+}
+
+.title-scatter-item {
+  border-color: rgba(255, 245, 230, 0.24);
+  border-radius: 2px !important;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(244, 195, 108, 0.04);
+}
+
+.title-hero-tagline {
+  color: var(--gold);
+  font-size: clamp(0.84rem, 1.35vw, 1rem);
+  letter-spacing: 0.32em;
+}
+
+.store-button,
+.nav-links a,
+.pill-link,
+.more-cards-line {
+  border-radius: 0;
+  border-color: rgba(255, 245, 230, 0.28);
+  background: rgba(12, 12, 11, 0.86);
+  transition: transform 180ms ease, color 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.store-button:hover,
+.nav-links a:hover,
+.pill-link:hover,
+.more-cards-line:hover {
+  color: #090909;
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.store-primary { color: #090909; background: var(--gold); border-color: var(--gold); }
+
+.section { margin-top: clamp(5.5rem, 12vw, 10rem); }
+.section-heading { position: relative; padding-top: 1.1rem; }
+.section-heading::before { content: ''; position: absolute; top: 0; width: min(9rem, 30%); height: 2px; background: var(--gold); }
+.eyebrow { color: var(--gold); font-size: 0.67rem; letter-spacing: 0.3em; }
+
+.section-heading h2,
+.rules-copy h2,
+.download-band h2,
+.hero h1 {
+  max-width: 13ch;
+  font-family: 'Unbounded', Impact, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.section-heading p:not(.eyebrow), .hero-lede, .mode-card p { color: #c9c2b7; }
+.moment-card, .mode-card, .hero-card, .phone-frame { border-radius: 2px; border-color: rgba(255, 245, 230, 0.22); }
+.moment-card::after, .mode-card-shade { background: linear-gradient(180deg, transparent 24%, rgba(9,9,9,.15) 48%, #090909 100%); }
+.moment-card h3 { font-family: 'Unbounded', Impact, sans-serif; letter-spacing: -0.06em; text-transform: uppercase; }
+
+.cards-section { position: relative; }
+.card-fan { min-height: clamp(410px, 46vw, 590px); }
+.website-hand-card-inner, .website-hand-card-face { border-radius: 1px; }
+.website-hand-card-face { border-color: rgba(255, 245, 230, 0.22); }
+.fan-card:hover .website-hand-card { filter: drop-shadow(0 34px 40px rgba(240, 94, 31, 0.28)); }
+
+.rules-section, .download-band { border-radius: 0; border-color: rgba(255, 245, 230, 0.18); }
+.download-band { background: linear-gradient(135deg, #20160c, #0e0d0c 60%, #19110b); }
+.site-footer { border-top-color: rgba(255, 245, 230, 0.16); }
+
+@media (max-width: 560px) {
+  .title-hero::before { top: 1rem; }
+  .title-hero::after { display: none; }
+  .section-heading h2 { letter-spacing: -0.06em; }
+}

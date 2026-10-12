@@ -70,7 +70,7 @@
     </style>
     <script>
       (function (location) {
-        var knownRoutes = ["/privacy"];
+        var knownRoutes = ["/privacy", "/wizbid/privacy"];
         if (knownRoutes.indexOf(location.pathname.replace(/\/$/, "")) === -1) return;
 
         var query = "/?p=" + location.pathname.replace(/&/g, "~and~");
